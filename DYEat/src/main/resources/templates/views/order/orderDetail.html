@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout}">
+<th:block layout:fragment="content">
+    <body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container-fluid top-container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-xl-4 offset-xl-2">
+                <div class="img-container"><img class="rounded" id="expandedImg" style="width:100%" src="assets/img/img1-min.jpg">
+                    <div id="imgtext"></div>
+                </div>
+                <div class="row img-row" style="padding-right: 10px;padding-left: 10px;">
+                    <div class="col column"><img class="img-thumbnail img-fluid" src="assets/img/img1-min.jpg" onclick="myFunction(this);" alt="image 1"></div>
+                    <div class="col column"><img class="img-thumbnail img-fluid" src="assets/img/img2-min.jpg" onclick="myFunction(this);" alt="image 2"></div>
+                    <div class="col column"><img class="img-thumbnail img-fluid" src="assets/img/img3-min.jpg" onclick="myFunction(this);" alt="image 3"></div>
+                    <div class="col column"><img class="img-thumbnail img-fluid" src="assets/img/img4-min.jpg" onclick="myFunction(this);" alt="image 4"></div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-4 offset-xl-0">
+                <h1>I am Your Bad Luck</h1>
+                <h2>$14.95</h2>
+                <p style="font-size: 20px;">Here goes your product description. Try to add your main keywords but remember that this is a text for humans, not robots. So write easy to read sentences that make sense.</p>
+                <p style="font-size: 20px;"><a href="https://1.envato.market/c/2052893/629767/10168">Click here</a> for thousands of top-notch T-SHIRT MOCKUPS to put your design on.</p>
+                <ul>
+                    <li>Fit type: men, women, kids<br></li>
+                    <li>Sizes: XS to 4XL<br></li>
+                    <li>Machine wash cold, dry low heat<br></li>
+                    <li>Double-needle sleeve and bottom hem<br></li>
+                    <li>Lightweight<br></li>
+                    <li>Classic fit<br></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="d-xxl-flex justify-content-xxl-center">
+        <div class="row" style="width: 80%;">
+            <div class="col d-xxl-flex justify-content-xxl-center" style="width: 80%;">
+                <nav class="fs-4 text-bg-light bg-light d-xxl-flex justify-content-xxl-center navbar navbar-light px-3" id="navbar-example2" style="width: 78%;">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link" href="#scrollspyHeading1" style="color: rgb(0,0,0);">상세정보</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#scrollspyHeading2" style="color: rgb(0,0,0);">구매평</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#scrollspyHeading3" style="color: rgb(0,0,0);">Q&amp;A</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="col offset-xxl-1" style="width: 83%;">
+        <hr>
+        <h4 id="scrollspyHeading1">상세정보</h4>
+        <p>...</p>
+        <hr>
+        <h4 id="scrollspyHeading2">구매평</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xxl-12 offset-xxl-0 d-xxl-flex justify-content-xxl-end"><button class="btn btn-primary d-xxl-flex" type="button">구매평 작성</button></div>
+                <div class="col d-flex justify-content-center" style="width: 100%;">
+                    <div style="width: 85%;">
+                        <table class="table table-striped table-bordered" id="example" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th style="width: 80%;">구매평</th>
+                                <th>작성자</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><img>존맛탱</td>
+                                <td>이은성</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h4 id="scrollspyHeading3">Q&amp;A</h4>
+    </div>
+    </body>
+</th:block>

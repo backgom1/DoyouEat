@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout}">
+<th:block layout:fragment="content">
+    <body>
+    <div class="shopping-cart">
+        <div class="px-4 px-lg-0">
+            <div class="pb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="bg-light border-0" scope="col">
+                                            <div class="text-uppercase p-2 px-3"><span>품목</span></div>
+                                        </th>
+                                        <th class="bg-light border-0" scope="col">
+                                            <div class="text-uppercase py-2"><span>가격</span></div>
+                                        </th>
+                                        <th class="bg-light border-0" scope="col">
+                                            <div class="text-uppercase py-2"><span>수량</span></div>
+                                        </th>
+                                        <th class="bg-light border-0" scope="col">
+                                            <div class="text-uppercase py-2"><span>삭제</span></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="border-0" scope="row">
+                                            <div class="p-2"><img class="rounded img-fluid shadow-sm" src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-1_zrifhn.jpg" alt="null" width="70">
+                                                <div class="d-inline-block ml-3 align-middle">
+                                                    <h5 class="mb-0"><a class="d-inline-block text-dark align-middle" href="#">Timex Unisex Originals</a></h5><span class="text-muted d-block font-weight-normal font-italic">Category: Watches</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="border-0 align-middle"><strong>0원</strong></td>
+                                        <td class="border-0 align-middle"><strong>3</strong></td>
+                                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                        <div class="col">
+                            <div class="text-uppercase bg-light rounded-pill px-4 py-3 font-weight-bold"><span>주문 정보</span></div>
+                            <div class="p-4">
+                                <form>
+                                    <div class="d-xl-flex justify-content-xl-center"><input class="form-control" type="text" placeholder="수령인"><input class="form-control" type="tel" placeholder="연락처" style="margin-left: 11px;"></div><input class="form-control" type="email" style="margin-top: 14px;" placeholder="이메일">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="text-uppercase bg-light rounded-pill px-4 py-3 font-weight-bold"><span>배송 정보</span></div>
+                            <div class="p-4">
+                                <form>
+                                    <div class="d-xl-flex justify-content-xl-center"><input class="form-control" type="text" placeholder="수령인"><input class="form-control" type="tel" placeholder="연락처" style="margin-left: 11px;"></div>
+                                </form>
+                            </div>
+                            <div class="text-uppercase bg-light rounded-pill px-4 py-3 font-weight-bold"><span>결제 방식</span></div>
+                            <div class="p-4">
+                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">무통장 결제</label></div>
+                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">카카오페이</label></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-12">
+                            <div class="text-uppercase bg-light rounded-pill px-4 py-3 font-weight-bold"><span>결제 정보</span></div>
+                            <div class="p-4">
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">결제 합계</strong><strong>0원</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">배송비</strong><strong>0원</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">종합</strong>
+                                        <h5 class="font-weight-bold">0원</h5>
+                                    </li>
+                                </ul><a class="btn btn-dark rounded-pill py-2 btn-block" role="button" href="#">결제 하기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</th:block>
