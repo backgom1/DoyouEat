@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/order")
 public class orderController {
 
-
     @GetMapping
-    public String orderDetail(){
+    public String orderList() {
+        return "views/order/orderList";
+    }
+
+
+    @GetMapping("/Detail")
+    public String orderDetail() {
         return "views/order/orderDetail";
     }
 
