@@ -291,7 +291,7 @@ pre {
   @include font-size($code-font-size);
   color: $pre-color;
 
-  // Account for some code outputs that place code tags in pre tags
+  // DYE_Account for some code outputs that place code tags in pre tags
   code {
     @include font-size(inherit);
     color: inherit;
@@ -334,7 +334,7 @@ figure {
 }
 
 
-// Images and content
+// DYE_Images and content
 
 img,
 svg {
