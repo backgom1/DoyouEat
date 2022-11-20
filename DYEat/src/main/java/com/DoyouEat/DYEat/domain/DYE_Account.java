@@ -1,5 +1,6 @@
 package com.DoyouEat.DYEat.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +32,9 @@ public class DYE_Account {
     @Column(name="Account_Type")
     private int type;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T' HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name="Account_newDate")
-    private LocalDateTime newDate;
+    private LocalDateTime newDate = LocalDateTime.now();
 
     @Column(name="Account_editDate")
     private LocalDateTime editDate;

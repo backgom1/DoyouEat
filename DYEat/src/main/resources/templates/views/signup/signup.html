@@ -3,6 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/layouts/layout}">
 <th:block layout:fragment="content">
+    <style>
+        .fieldError {
+            border-color: #bd2130;
+        }
+    </style>
     <body>
     <section class="clean-block clean-form dark h-100">
     <div class="container">
@@ -14,6 +19,8 @@
         <form th:action="@{/signup}" th:object="${signupForm}" method="post" enctype="multipart/form-data" role="form">
             <div class="d-flex justify-content-start">
                 <div class="form-floating mb-3" style="width: 100%">
+                    <input class="form-control" th:value="${signupForm.newDatewDate}" type="hidden" name="제목"
+                           placeholder="자동 날짜"/>
                     <input th:field="*{emailId}"  name="EmailInput" id="EmailInput" class="form-control" type="email" placeholder="이메일@"
                            th:class="${#fields.hasErrors('emailId')}? 'form-control fieldError' : 'form-control'"
                            style="height: 60px;">
@@ -73,10 +80,6 @@
         </form>
     </div>
     <br>
-    <div class="d-flex justify-content-center">
-        <p style="text-align: center">혹시 아이디가 있으신가요?</p>
-        <a href="/login"> 로그인</a>
-    </div>
     </section>
 
     </body>
