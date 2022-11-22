@@ -30,16 +30,18 @@
             </div>
             <div class="login-box-seperator"></div>
         </div>
-        <div class="email-login" style="background-color: #ffffff;"><input class="email-imput form-control" type="email"
-                                                                           style="margin-top: 10px;" required
-                                                                           placeholder="Email" minlength="6"/><input
-                class="password-input form-control" type="password" style="margin-top: 10px;" required
-                placeholder="Password" minlength="6"/></div>
+        <form th:action="@{/login}" method="post">
+        <div class="email-login" style="background-color: #ffffff;">
+            <input class="email-input form-control" type="email" name="username"
+                   style="margin-top: 10px;" required placeholder="Email" minlength="6"/>
+            <input class="password-input form-control" type="password" style="margin-top: 10px;" required
+                placeholder="Password" minlength="6" name="password"/></div>
         <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;">
             <button id="submit-id-submit" class="btn btn-primary d-block box-shadow w-100" type="submit">로그인</button>
-            <div class="d-flex justify-content-end">
-                <a id="forgot-password-link" href="#">아이디를 잊었나요?</a>
-            </div>
+        </div>
+        </form>
+        <div style="text-align: center; font-size: 25px;" th:if="error">
+            <p id="valid" style="color: red; font-size:17px;"><a th:text="${exception}"></a></p>
         </div>
         <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
             <p style="margin-bottom: 0px;">아이디가 없으신가요?<a id="register-link" th:href="@{/signup}">회원가입</a></p>

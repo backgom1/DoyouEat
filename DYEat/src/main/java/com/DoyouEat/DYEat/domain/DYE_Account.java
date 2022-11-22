@@ -20,8 +20,8 @@ public class DYE_Account {
     @Column(name = "Account_Code")
     private Long id;
 
-    @Column(name="Account_EmailID",length = 50)
-    private String emailId;
+    @Column(name="Account_Username",length = 50)
+    private String username;
 
     @Column(name="Account_Password",length = 200)
     private String password;
@@ -29,8 +29,9 @@ public class DYE_Account {
     @Column(name="Account_Nickname", length = 30)
     private String nickname;
 
-    @Column(name="Account_Type")
-    private int type;
+    @Enumerated(EnumType.STRING)
+    @Column(name="Account_Role")
+    private DYE_Role role;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T' HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name="Account_newDate")

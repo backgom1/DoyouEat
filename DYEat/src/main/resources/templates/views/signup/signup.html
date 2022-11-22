@@ -9,6 +9,8 @@
         }
     </style>
     <body>
+    <br>
+    <br>
     <section class="clean-block clean-form dark h-100">
     <div class="container">
         <div class="block-heading" style="padding-top: 0px;">
@@ -19,16 +21,16 @@
         <form th:action="@{/signup}" th:object="${signupForm}" method="post" enctype="multipart/form-data" role="form">
             <div class="d-flex justify-content-start">
                 <div class="form-floating mb-3" style="width: 100%">
-                    <input class="form-control" th:value="${signupForm.newDatewDate}" type="hidden" name="제목"
+                    <input class="form-control" th:value="${signupForm.newDate}" type="hidden" name="제목"
                            placeholder="자동 날짜"/>
-                    <input th:field="*{emailId}"  name="EmailInput" id="EmailInput" class="form-control" type="email" placeholder="이메일@"
-                           th:class="${#fields.hasErrors('emailId')}? 'form-control fieldError' : 'form-control'"
+                    <input th:field="*{username}"  name="EmailInput" id="EmailInput" class="form-control" type="email" placeholder="이메일@"
+                           th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'"
                            style="height: 60px;">
                     <label for="EmailInput">이메일 아이디</label>
-                    <p th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}">이메일 양식 맞추세요</p>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">이메일 양식 맞추세요</p>
                 </div>
                 <input class="btn btn-primary" type="button" id="userCheck" name="userCheck" value="중복 검사"
-                       style="width: 25%;height: 60px;margin-left: 5px; text-align: center;font-size: 11px;background: rgb(32,113,250);border-color: rgb(255,255,255);"/>
+                       style="width: 25%;height: 60px;margin-left: 5px; text-align: center;font-size: 17px;background: rgb(32,113,250);border-color: rgb(255,255,255);"/>
                 <span id="result"></span>
             </div>
             <br>
