@@ -1,7 +1,6 @@
 package com.DoyouEat.DYEat.controller.signup;
 
 import com.DoyouEat.DYEat.domain.DYE_Account;
-import com.DoyouEat.DYEat.domain.DYE_Role;
 import com.DoyouEat.DYEat.service.account.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,7 +39,7 @@ public class signupController {
         account.setNickname(form.getNickname());
         account.setNewDate(form.getNewDate());
         account.setPassword(passwordEncoder.encode(form.getPassword()));
-        account.setRole(DYE_Role.valueOf("ROLE_USER"));
+        account.setRole("ROLE_USER");
 
         accountService.saveAccount(account);
         return "redirect:/main";

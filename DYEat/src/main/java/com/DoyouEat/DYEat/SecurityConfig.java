@@ -1,6 +1,9 @@
 package com.DoyouEat.DYEat;
 
 import com.DoyouEat.DYEat.service.security.CustomFailureHandler;
+//import com.DoyouEat.DYEat.service.security.CustomSuccessHandler;
+import com.DoyouEat.DYEat.service.security.PrincipalOauth2UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +22,12 @@ import javax.servlet.http.HttpSession;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    private CustomFailureHandler customFailureHandler;
+
+    private final PrincipalOauth2UserService principalOauth2UserService;
+    private final CustomFailureHandler customFailureHandler;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -32,8 +37,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeRequests()
-                .antMatchers("/main/**").permitAll()
-                .antMatchers("/order/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/main/**","/login/**").permitAll()
+                .antMatchers("/order/**","/mypage/**").access("hasRole('ROLE_USER')")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -42,6 +47,14 @@ public class SecurityConfig {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .failureHandler(customFailureHandler)
+//                .successHandler(customSuccessHandler)
+                .and()
+                .oauth2Login()
+                .loginPage("/login")
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService)
+                .and()
+                .defaultSuccessUrl("/main")
                 .and()
                 .logout()
                 .deleteCookies("JSESSIONID"/*, "remember-me"*/)
@@ -61,7 +74,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

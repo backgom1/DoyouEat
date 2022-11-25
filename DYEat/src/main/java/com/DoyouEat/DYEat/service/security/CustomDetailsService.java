@@ -3,11 +3,14 @@ package com.DoyouEat.DYEat.service.security;
 import com.DoyouEat.DYEat.domain.DYE_Account;
 import com.DoyouEat.DYEat.repository.account.AccountApiRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.nio.file.attribute.UserPrincipal;
 
 
 // 시큐리티 설정에서 loginProcessingUrl
@@ -17,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CustomDetailsService implements UserDetailsService {
 
-    //시큐리티 session(Authentication(내부 UserDetails))
+    //시큐리티 session(Authentication(내부 UserDetails)
     private final AccountApiRepository accountApiRepository;
 
     @Override

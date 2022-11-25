@@ -16,6 +16,36 @@ spring:
         #        show_sql: true
         format_sql: true
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 487722941284-6l5b3tckj1k9896mt201cqjqsfhrmcr6.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+          kakao:
+            client-id: c9d7731515125d31b79dc2a69f6f6900
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            client-authentication-method: POST
+            client-secret: DqhgOwTiElkIetX9EOSkHZM3HqKJ8Iv7
+            authorization-grant-type: authorization_code
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+            client-name: kakao
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+
+
 
 logging.level:
   org.hibernate.SQL: debug

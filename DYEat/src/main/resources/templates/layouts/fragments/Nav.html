@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="NavFragment">
     <!-- 툴바 시작 -->
@@ -14,8 +14,11 @@
                             <img style="width: 80px;" th:src="@{/assets/img/main_icon.png}">DoyouEat</h2></a>
                 </div>
                 <div class="d-inline-flex align-items-center justify-content-center">
-                    <a th:href="@{/login}" class="navbar-brand">
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="navbar-brand">
                         <h1><i style="margin-right: 30px;" class="bi bi-box-arrow-in-right"></i></h1>
+                    </a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="navbar-brand">
+                        <h1><i style="margin-right: 20px;" class="bi bi-box-arrow-in-left"></i></h1>
                     </a>
                     <a th:href="@{/mypage}" class="navbar-brand">
                         <h1><i style="margin-right: 30px;" class="bi bi-person-fill"></i></h1>

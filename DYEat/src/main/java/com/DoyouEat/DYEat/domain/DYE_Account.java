@@ -1,9 +1,14 @@
 package com.DoyouEat.DYEat.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Setter
 @Getter
+@Setter
+@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class DYE_Account {
 
     @Id
@@ -29,24 +36,40 @@ public class DYE_Account {
     @Column(name="Account_Nickname", length = 30)
     private String nickname;
 
-    @Enumerated(EnumType.STRING)
+    @Column(name="Account_Picture", length = 200)
+    private String picture;
+
+    @Column(name="Account_Provider", length = 30)
+    private String provider;
+
+    @Column(name="Account_Provider_id", length = 30)
+    private String providerid;
+
     @Column(name="Account_Role")
-    private DYE_Role role;
+    private String role;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T' HH:mm:ss", timezone = "Asia/Seoul")
+    @CreatedDate
     @Column(name="Account_newDate")
-    private LocalDateTime newDate = LocalDateTime.now();
+    private LocalDateTime newDate;
 
+    @LastModifiedDate
     @Column(name="Account_editDate")
     private LocalDateTime editDate;
+
+    @Builder
+    public DYE_Account(String username, String password, String nickname, String picture, String provider, String providerid, String role) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.picture = picture;
+        this.provider = provider;
+        this.providerid = providerid;
+        this.role = role;
+    }
 
     @JsonIgnore
     @OneToMany(mappedBy = "DYEAccount")
     private List<DYE_Menu> account_DYE_menus = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "DYEAccount")
-    private List<DYE_Images> account_images = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "DYEAccount")

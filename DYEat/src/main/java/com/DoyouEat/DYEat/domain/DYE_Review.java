@@ -3,6 +3,9 @@ package com.DoyouEat.DYEat.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Setter
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 public class DYE_Review {
 
     @Id
@@ -34,9 +38,11 @@ public class DYE_Review {
     private String text;
 
 
+    @CreatedDate
     @Column(name="Review_newDate")
     private LocalDateTime newDate;
 
+    @LastModifiedDate
     @Column(name="Review_editDate")
     private LocalDateTime editDate;
 }

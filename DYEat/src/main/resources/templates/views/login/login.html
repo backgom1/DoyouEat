@@ -13,12 +13,12 @@
         </div>
         <div class="login-box-content">
             <div class="fb-login box-shadow " style="height: 50px; background:#ffd74b;"><a
-                    class="d-flex flex-row align-items-center social-login-link "  href="#">
+                    class="d-flex flex-row align-items-center social-login-link "  th:href="@{/oauth2/authorization/kakao}">
                 <img style="width: 35px; margin-right: 13px;margin-left: 10px;padding-bottom: 0px;padding-top: 7px; " th:src="@{/assets/img/kakao_icon.png}">카카오톡으로 로그인</a>
             </div>
             <div class="gp-login box-shadow" style="height: 50px;"><a
                     class="d-flex flex-row align-items-center social-login-link"
-                    style="margin-bottom: 10px;" href="#">
+                    style="margin-bottom: 10px;" th:href="@{/oauth2/authorization/google}">
                 <i class="bi bi-google" style="color: rgb(255,255,255);width: 56px; margin-bottom: 25px;"></i>구글아이디로 로그인</a>
             </div>
         </div>

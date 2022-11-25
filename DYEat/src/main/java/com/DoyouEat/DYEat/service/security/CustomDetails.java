@@ -1,22 +1,36 @@
 package com.DoyouEat.DYEat.service.security;
 
 import com.DoyouEat.DYEat.domain.DYE_Account;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 
-public class CustomDetails implements UserDetails {
+@Data
+public class CustomDetails implements UserDetails, OAuth2User {
 
 
     private DYE_Account account;
+    private Map<String, Object> attributes;
 
-    //해당 Account 권한 리턴
     public CustomDetails(DYE_Account account) {
         this.account = account;
     }
+
+
+    public CustomDetails(DYE_Account account,Map<String ,Object> attributes) {
+        this.account = account;
+        this.attributes = attributes;
+    }
+
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -25,7 +39,7 @@ public class CustomDetails implements UserDetails {
 
             @Override
             public String getAuthority() {
-                return String.valueOf(account.getRole());
+                return account.getRole();
             }
         });
         return collect;
@@ -61,5 +75,14 @@ public class CustomDetails implements UserDetails {
     public boolean isEnabled() {
         //휴면계정할때 활성화
         return true;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+    @Override
+    public String getName() {
+        return null;
     }
 }

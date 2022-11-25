@@ -30,11 +30,6 @@ public class DYE_Images {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="DYE_Images_Account_Code")
-    private DYE_Account DYEAccount;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="DYE_Images_Menu_Code")
     private DYE_Menu DYEMenu;
 

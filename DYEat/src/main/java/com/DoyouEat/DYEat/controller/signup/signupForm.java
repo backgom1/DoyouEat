@@ -1,6 +1,5 @@
 package com.DoyouEat.DYEat.controller.signup;
 
-import com.DoyouEat.DYEat.domain.DYE_Role;
 import lombok.Getter;
 import lombok.Setter;
 

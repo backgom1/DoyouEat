@@ -4,6 +4,9 @@ package com.DoyouEat.DYEat.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class DYE_Orders {
 
     @Id
@@ -50,9 +54,11 @@ public class DYE_Orders {
     @Column(name = "Orders_PhoneNumber")
     private int phoneNumber;
 
+    @CreatedDate
     @Column(name = "Orders_newDate")
     private LocalDateTime newDate;
 
+    @LastModifiedDate
     @Column(name = "Orders_editDate")
     private LocalDateTime editDate;
 
