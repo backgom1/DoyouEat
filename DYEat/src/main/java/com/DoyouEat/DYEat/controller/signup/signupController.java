@@ -21,13 +21,13 @@ public class signupController {
     private final AccountService accountService;
 
     @GetMapping
-    public String signup(Model model) {
-        model.addAttribute("signupForm", new signupForm());
+    public String Signup(Model model) {
+        model.addAttribute(SignupDefinition.SingUpForm, new signupForm());
         return "views/signup/signup";
     }
 
     @PostMapping
-    public String savedSignup(@Valid signupForm form, BindingResult result) {
+    public String SavedSignup(@Valid signupForm form, BindingResult result) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         if (result.hasErrors()) {
@@ -40,6 +40,7 @@ public class signupController {
         account.setNewDate(form.getNewDate());
         account.setPassword(passwordEncoder.encode(form.getPassword()));
         account.setRole("ROLE_USER");
+        account.setProvider("general");
 
         accountService.saveAccount(account);
         return "redirect:/main";

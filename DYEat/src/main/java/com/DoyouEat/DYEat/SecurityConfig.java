@@ -47,7 +47,6 @@ public class SecurityConfig {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .failureHandler(customFailureHandler)
-//                .successHandler(customSuccessHandler)
                 .and()
                 .oauth2Login()
                 .loginPage("/login")
