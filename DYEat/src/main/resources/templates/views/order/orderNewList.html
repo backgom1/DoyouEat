@@ -24,7 +24,7 @@
 
             <div id="multistep-start-row" class="row">
                 <div id="multistep-start-column" class="col-12 col-lg-8 m-auto">
-                    <form id="main-form" class="multisteps-form__form" th:action="@{/items/new}" method="post"
+                    <form id="main-form" class="multisteps-form__form" th:action="@{/order/new}" method="post"
                           enctype="multipart/form-data">
                         <div id="single-form-next" class="multisteps-form__panel shadow p-4 rounded bg-white js-active"
                              data-animation="scaleIn">
@@ -55,11 +55,11 @@
                                 </div>
                                 <div id="input-grp-single-1" class="form-row mt-4">
                                     <div class="col-12">
-                                        <label style="width: 10%; margin-top: 10px">대표 사진</label>
-                                        <input class="form-control multisteps-form__input" name="attachFile" type="file"/>
+                                        <label style="width: 20%; margin-top: 10px">사진</label>
+                                        <input class="form-control multisteps-form__input" name="mainFile" type="file"/>
                                     </div>
                                     <div class="col-12">
-                                        <label style="width: 20%; margin-top: 10px">게시판 사진</label>
+                                        <label style="width: 20%; margin-top: 10px">사진</label>
                                         <input class="form-control multisteps-form__input" multiple="multiple" name="imageFiles" type="file"/>
                                     </div>
                                 </div>
@@ -79,9 +79,9 @@
                                 <div class="col-12 col-sm-6 mt-4 mt-sm-0" style="width: 100%">
                                     <select class="form-select" style="width: 100%">
                                         <optgroup name="type" label>
-                                            <option value="코딩 상담">간단 가정식</option>
-                                            <option value="스터디 상담">푸짐 간단식</option>
-                                            <option value="공부 상담">단품</option>
+                                            <option value="1">간단 가정식</option>
+                                            <option value="2">푸짐 간단식</option>
+                                            <option value="3">단품</option>
                                         </optgroup>
                                     </select>
                                 </div>

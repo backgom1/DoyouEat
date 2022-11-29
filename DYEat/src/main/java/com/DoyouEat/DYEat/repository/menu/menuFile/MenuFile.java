@@ -24,7 +24,7 @@ public class MenuFile {
         return fileDir + fileName;
     }
 
-    //여러개의 이미지를 받는 메서드
+    //여러개의 이미지 처리 메서드
     public List<DYE_Images> storeFiles(List<MultipartFile> multipartFileList) throws IOException {
         List<DYE_Images> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFileList){
@@ -36,14 +36,22 @@ public class MenuFile {
         return storeFileResult;
     }
 
+
+    //단일 이미지를 받는 메서드
     public DYE_Images storeFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
+        //실제 이미지 파일 이름
         String originalName = multipartFile.getOriginalFilename();
 
+        //변경된 이미지 파일 이름 (랜덤)
         String saveName = createStoreFileName(originalName);
+
+        //파일 저장 명령어
         multipartFile.transferTo(new File(getFullPath(saveName)));
+
+
         return new DYE_Images(originalName,saveName);
     }
 

@@ -10,6 +10,6 @@ public class ImageForm {
 
     private Long id;
     private String menuName;
+    private int type;
     private List<MultipartFile> imageFiles;
-    private MultipartFile attachFile;
 }

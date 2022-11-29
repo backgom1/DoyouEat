@@ -12,4 +12,6 @@ public class MenuForm {
     private String text;
     private int price;
     private int type;
+    private String picture;
+    private int category;
 }

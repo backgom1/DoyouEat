@@ -35,6 +35,9 @@ public class DYE_Menu {
     @Column(name="Menu_Text",length =100)
     private String text;
 
+    @Column(name="Menu_Picture",length =255)
+    private String picture;
+
     @Column(name="Menu_Type")
     private int type;
 
@@ -53,7 +56,7 @@ public class DYE_Menu {
     private LocalDateTime editDate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "DYEMenu")
+    @OneToMany(mappedBy = "DYEMenu" ,orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<DYE_Images> menu_images = new ArrayList<>();
 
     @JsonIgnore
