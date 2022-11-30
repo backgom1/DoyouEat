@@ -17,7 +17,7 @@ import java.util.UUID;
 public class MenuFile {
 
     @Value("${file.dir}")
-    private String fileDir;
+     private String fileDir;
 
     //전체 경로를 받아오는 메서드
     public String getFullPath(String fileName){
@@ -48,11 +48,13 @@ public class MenuFile {
         //변경된 이미지 파일 이름 (랜덤)
         String saveName = createStoreFileName(originalName);
 
+        String filePath = fileDir;
+
         //파일 저장 명령어
         multipartFile.transferTo(new File(getFullPath(saveName)));
 
 
-        return new DYE_Images(originalName,saveName);
+        return new DYE_Images(originalName,saveName,filePath);
     }
 
     //파일 이름 만드는 작업을 합니다.

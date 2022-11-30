@@ -28,6 +28,7 @@ public class DYE_Images {
     @Column(name="DYE_Images_saveName", length = 200)
     private String saveName;
 
+
     @CreatedDate
     @Column(name="DYE_Images_newDate")
     private LocalDateTime newDate;
@@ -49,7 +50,7 @@ public class DYE_Images {
         this.type = type;
     }
 
-    public DYE_Images(String originalName, String saveName) {
+    public DYE_Images(String originalName, String saveName, String path) {
         this.originalName = originalName;
         this.saveName = saveName;
     }

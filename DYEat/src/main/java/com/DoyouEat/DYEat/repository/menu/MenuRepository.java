@@ -2,6 +2,7 @@ package com.DoyouEat.DYEat.repository.menu;
 
 import com.DoyouEat.DYEat.domain.DYE_Account;
 import com.DoyouEat.DYEat.domain.DYE_Images;
+import com.DoyouEat.DYEat.domain.DYE_Menu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,10 @@ public class MenuRepository {
         return em.createQuery("select a from DYE_Images a",DYE_Images.class)
                 .getResultList();
     }
+
+
+    public DYE_Menu menuFindOne(Long id){
+        return em.find(DYE_Menu.class,id);
+    }
+
 }

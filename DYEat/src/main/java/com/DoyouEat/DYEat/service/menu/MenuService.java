@@ -3,6 +3,7 @@ package com.DoyouEat.DYEat.service.menu;
 
 import com.DoyouEat.DYEat.domain.DYE_Account;
 import com.DoyouEat.DYEat.domain.DYE_Images;
+import com.DoyouEat.DYEat.domain.DYE_Menu;
 import com.DoyouEat.DYEat.repository.menu.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,8 @@ public class MenuService {
       return menuRepository.findOne(id);
     }
 
+
+    public DYE_Menu menuFindOne(Long id) {
+        return menuRepository.menuFindOne(id);
+    }
 }
