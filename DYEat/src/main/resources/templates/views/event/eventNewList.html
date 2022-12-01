@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout}">
+<th:block layout:fragment="content">
+    <body>
+    <br>
+    <br>
+    <br>
+    <section>
+        <div id="multple-step-form-n" class="container overflow-hidden"
+             style="margin-top: 0px;margin-bottom: 10px;padding-bottom: 300px;padding-top: 57px;">
+            <div id="progress-bar-button" class="multisteps-form">
+                <div class="d-xxl-flex justify-content-xxl-center row">
+                    <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                        <div class="multisteps-form__progress"><a class="btn multisteps-form__progress-btn js-active"
+                                                                  role="button" title="User Info">제목을 입력하세요</a><a
+                                class="btn multisteps-form__progress-btn" role="button" title="User Info">사진 첨부하기</a><a
+                                class="btn multisteps-form__progress-btn" role="button" title="User Info">기타 정보 입력</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="multistep-start-row" class="row">
+                <div id="multistep-start-column" class="col-12 col-lg-8 m-auto">
+                    <form id="main-form" class="multisteps-form__form" th:action="@{/event/new}" method="post"
+                          enctype="multipart/form-data">
+                        <div id="single-form-next" class="multisteps-form__panel shadow p-4 rounded bg-white js-active"
+                             data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">제목을 입력해주세요</h3>
+                            <div id="form-content" class="multisteps-form__content">
+                                <div id="input-grp-double" class="d-xxl-flex justify-content-xxl-center form-row mt-4">
+                                    <div class="col-12 col-sm-6" style="width: 100%;"><input
+                                            class="form-control multisteps-form__input" name="title" type="text"
+                                            placeholder="제목을 입력해주세요." style="width: 100%;"/></div>
+                                </div>
+                                <div id="next-button" class="d-xxl-flex justify-content-xxl-end button-row d-flex mt-4">
+                                    <button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">
+                                        다음
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="single-form-next-prev" class="multisteps-form__panel shadow p-4 rounded bg-white"
+                             data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">사진을 등록해주세요</h3>
+                            <div id="form-content-1" class="multisteps-form__content" style="width: 100%">
+                                <div id="input-grp-double-1" class="form-row mt-4" style="width: 100%" >
+                                    <div class="d-flex justify-content-start col-12 col-sm-6" style="width: 100%" >
+                                        <label style="width: 10%; margin-top: 10px">이벤트 이름 :  </label><input
+                                            style="width: 90%"
+                                            class="form-control multisteps-form__input"
+                                            type="text" name="menuName" placeholder="이벤트 이름"/></div>
+                                </div>
+                                <div id="input-grp-single-1" class="form-row mt-4">
+                                    <div class="col-12">
+                                        <label style="width: 20%; margin-top: 10px">사진</label>
+                                        <input class="form-control multisteps-form__input" name="mainFile" type="file"/>
+                                    </div>
+                                </div>
+                                <div id="next-prev-buttons" class="button-row d-flex mt-4">
+                                    <button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">이전
+                                    </button>
+                                    <button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">
+                                        다음
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="single-form-next-prev-1" class="multisteps-form__panel shadow p-4 rounded bg-white"
+                             data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">정보 입력</h3>
+                            <div id="form-content-2" class="multisteps-form__content" style="width: 100%">
+                                <div id="input-grp-single-2" class="form-row mt-4"  style="width: 100%">
+                                    <div class="d-flex justify-content-start col-12 col-sm-6"  style="width: 100%">
+                                        <label style="width: 10%; margin-top: 10px">내용 입력:</label>
+                                        <input name="text" style="width: 90%" class="form-control multisteps-form__input" type="text"
+                                                               placeholder="내용을 입력해주세요"/></div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-4 mt-sm-0" style="width: 100%">
+                                    <select class="form-select" style="width: 100%">
+                                        <optgroup name="onoff" label>
+                                            <option th:value="0">종료된 이벤트</option>
+                                            <option th:value="1">진행중인 이벤트</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div id="next-prev-buttons-1" class="button-row d-flex mt-4">
+                                    <button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">이전
+                                    </button>
+                                    <input class="btn btn btn-primary ml-auto js-btn-next" type="submit" value="완료"
+                                           title="Next">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+</th:block>

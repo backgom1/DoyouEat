@@ -3,18 +3,27 @@ package com.DoyouEat.DYEat.repository.menu.menuFile;
 
 import com.DoyouEat.DYEat.domain.DYE_Images;
 import com.DoyouEat.DYEat.domain.DYE_Menu;
+import com.DoyouEat.DYEat.repository.menu.ImagesApiRepository;
+import com.DoyouEat.DYEat.repository.menu.MenuApiRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class MenuFile {
+
+    private final MenuApiRepository menuApiRepository;
+    private final ImagesApiRepository imagesApiRepository;
 
     @Value("${file.dir}")
      private String fileDir;
@@ -37,6 +46,7 @@ public class MenuFile {
     }
 
 
+    @Transactional
     //단일 이미지를 받는 메서드
     public DYE_Images storeFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {
@@ -47,14 +57,11 @@ public class MenuFile {
 
         //변경된 이미지 파일 이름 (랜덤)
         String saveName = createStoreFileName(originalName);
-
-        String filePath = fileDir;
-
         //파일 저장 명령어
         multipartFile.transferTo(new File(getFullPath(saveName)));
 
 
-        return new DYE_Images(originalName,saveName,filePath);
+        return new DYE_Images(originalName,saveName);
     }
 
     //파일 이름 만드는 작업을 합니다.

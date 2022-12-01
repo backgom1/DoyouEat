@@ -41,8 +41,8 @@ public class DYE_Images {
     private int type;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="DYE_Images_Menu_Code")
+    @ManyToOne
+    @JoinColumn(name="Menu_code")
     private DYE_Menu DYEMenu;
 
     @Builder
@@ -50,7 +50,7 @@ public class DYE_Images {
         this.type = type;
     }
 
-    public DYE_Images(String originalName, String saveName, String path) {
+    public DYE_Images(String originalName, String saveName) {
         this.originalName = originalName;
         this.saveName = saveName;
     }

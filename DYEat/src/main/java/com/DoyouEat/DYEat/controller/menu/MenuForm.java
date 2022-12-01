@@ -1,5 +1,6 @@
 package com.DoyouEat.DYEat.controller.menu;
 
+import com.DoyouEat.DYEat.domain.DYE_Images;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,4 +15,5 @@ public class MenuForm {
     private int type;
     private String picture;
     private int category;
+    private List<DYE_Images> dyeImageFiles;
 }

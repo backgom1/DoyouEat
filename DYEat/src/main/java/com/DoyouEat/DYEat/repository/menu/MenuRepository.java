@@ -15,6 +15,10 @@ public class MenuRepository {
 
     private final EntityManager em;
 
+    public void save(DYE_Menu dye_menu){
+        em.persist(dye_menu);
+    }
+
 
     public void save(DYE_Images dye_images){
         em.persist(dye_images);

@@ -16,7 +16,12 @@ public class MenuService {
     private final MenuRepository menuRepository;
 
     @Transactional
-    public void saveAccount(DYE_Images dye_images){
+    public void saveMenus(DYE_Menu dye_menu){
+        menuRepository.save(dye_menu);
+    }
+
+    @Transactional
+    public void saveImages(DYE_Images dye_images){
         menuRepository.save(dye_images);
     }
 

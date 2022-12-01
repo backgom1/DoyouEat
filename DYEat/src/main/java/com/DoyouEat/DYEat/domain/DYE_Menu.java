@@ -21,7 +21,7 @@ public class DYE_Menu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Menu_Code")
+    @Column(name="Menu_code")
     private Long id;
 
     @Column(name="Menu_Title",length = 50)
@@ -56,7 +56,7 @@ public class DYE_Menu {
     private LocalDateTime editDate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "DYEMenu" ,orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "DYEMenu", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<DYE_Images> menu_images = new ArrayList<>();
 
     @JsonIgnore

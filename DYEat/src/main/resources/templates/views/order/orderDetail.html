@@ -15,7 +15,7 @@
                     <div id="imgtext"></div>
                 </div>
                 <div class="row img-row" style="padding-right: 10px;padding-left: 10px;">
-                    <div class="col column"><img th:each="imageList : ${menuId.getMenu_images}" class="img-thumbnail img-fluid" th:src="|/images/${imageList.getSaveName()}|" onclick="myFunction(this);" alt="image 1"></div>
+                    <div th:each="imageList : ${menuId.menu_images}" class="col column"><img class="img-thumbnail img-fluid" th:src="|/images/${imageList.getSaveName()}|" onclick="myFunction(this);" alt="image 1"></div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-4 offset-xl-0">
