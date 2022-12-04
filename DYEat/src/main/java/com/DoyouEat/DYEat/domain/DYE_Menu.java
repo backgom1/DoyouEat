@@ -55,8 +55,8 @@ public class DYE_Menu {
     @Column(name="Menu_editDate")
     private LocalDateTime editDate;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "DYEMenu", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "Menu_code")
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private List<DYE_Images> menu_images = new ArrayList<>();
 
     @JsonIgnore
