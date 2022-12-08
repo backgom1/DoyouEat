@@ -71,8 +71,8 @@ public class DYE_Account {
     @OneToMany(mappedBy = "DYEAccount")
     private List<DYE_Menu> account_DYE_menus = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "DYEAccount")
+    @JoinColumn(name = "Account_Code")
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private List<DYE_Orders> account_orders = new ArrayList<>();
 
     @JsonIgnore
@@ -80,6 +80,7 @@ public class DYE_Account {
     private List<DYE_Review> account_DYE_reviews = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "DYEAccount")
+    @JoinColumn(name = "Account_Code")
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private List<DYE_Payment> account_DYE_payment = new ArrayList<>();
 }

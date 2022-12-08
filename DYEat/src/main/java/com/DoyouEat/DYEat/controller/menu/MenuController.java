@@ -1,5 +1,6 @@
 package com.DoyouEat.DYEat.controller.menu;
 
+import com.DoyouEat.DYEat.controller.order.OrderForm;
 import com.DoyouEat.DYEat.domain.DYE_Account;
 import com.DoyouEat.DYEat.domain.DYE_Images;
 import com.DoyouEat.DYEat.domain.DYE_Menu;
@@ -77,14 +78,15 @@ public class MenuController {
 
     //디테일 페이지로 이동
     @GetMapping("/order/{id}/detail")
-    public String items(@ModelAttribute ImageForm itemForm, @PathVariable Long id , Model model) throws IOException {
+    public String items(@ModelAttribute OrderForm orderForm, @ModelAttribute ImageForm itemForm, @PathVariable Long id , Model model) throws IOException {
         DYE_Menu dye_menu = menuService.menuFindOne(id);
         MenuForm form= new MenuForm();
         form.setTitle(dye_menu.getTitle());
         form.setPrice(dye_menu.getPrice());
         form.setText(dye_menu.getText());
-        List<DYE_Images> menu_images = dye_menu.getMenu_images();
-        log.info(String.valueOf(menu_images));
+        List<DYE_Menu> dyeMenuList = menuApiRepository.findAll();
+//        List<DYE_Images> menu_images = dye_menu.getMenu_images();
+//        log.info(String.valueOf(menu_images));
         model.addAttribute("menuId",dye_menu);
         return "/views/order/orderDetail";
     }

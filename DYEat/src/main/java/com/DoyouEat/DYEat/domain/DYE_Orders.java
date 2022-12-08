@@ -29,7 +29,7 @@ public class DYE_Orders {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Order_Account_Code")
+    @JoinColumn(name = "Account_Code")
     private DYE_Account DYEAccount;
 
     @JsonIgnore
@@ -39,20 +39,20 @@ public class DYE_Orders {
 
     @JsonIgnore
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "delivery_id")
+    @JoinColumn(name = "Delivery_Code")
     private DYE_Delivery dye_delivery;
 
     @Column(name = "Orders_Status")
     private int status;
 
-    @Column(name = "Orders_Name", length = 50)
-    private String name;
+    @Column(name="Order_WantDate", length =50)
+    private String wantdate;
 
-    @Column(name = "Orders_Email", length = 50)
-    private String email;
+    @Column(name="Order_How", length =50)
+    private String how;
 
-    @Column(name = "Orders_PhoneNumber")
-    private int phoneNumber;
+    @Column(name="Order_Price")
+    private int price;
 
     @CreatedDate
     @Column(name = "Orders_newDate")
@@ -62,7 +62,4 @@ public class DYE_Orders {
     @Column(name = "Orders_editDate")
     private LocalDateTime editDate;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "DYEOrders")
-    private List<DYE_Payment> order_DYE_payment = new ArrayList<>();
 }

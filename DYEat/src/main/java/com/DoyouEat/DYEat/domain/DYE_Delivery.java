@@ -29,11 +29,9 @@ public class DYE_Delivery {
     @OneToOne(mappedBy = "dye_delivery", fetch = LAZY)
     private DYE_Orders dye_orders;
 
-    @Column(name="Delivery_WantDate", length =50)
-    private String wantdate;
-
-    @Column(name="Delivery_How", length =50)
-    private String how;
+    @JsonIgnore
+    @OneToOne(mappedBy = "dye_delivery", fetch = LAZY)
+    private DYE_Payment dye_payment;
 
     @Column(name="Delivery_Address", length =50)
     private String address;
