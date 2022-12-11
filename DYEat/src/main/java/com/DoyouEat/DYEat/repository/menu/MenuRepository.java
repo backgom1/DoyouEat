@@ -28,6 +28,7 @@ public class MenuRepository {
         return em.find(DYE_Images.class,id);
     }
 
+
     public List<DYE_Images> findAll(Long id){
         return em.createQuery("select a from DYE_Images a",DYE_Images.class)
                 .getResultList();
@@ -36,6 +37,11 @@ public class MenuRepository {
 
     public DYE_Menu menuFindOne(Long id){
         return em.find(DYE_Menu.class,id);
+    }
+
+    public List<DYE_Menu> menuFindAll(Long id){
+        return em.createQuery("select a from DYE_Menu a",DYE_Menu.class)
+                .getResultList();
     }
 
 }

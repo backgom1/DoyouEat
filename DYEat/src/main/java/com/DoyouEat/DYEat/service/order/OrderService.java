@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -24,9 +26,9 @@ public class OrderService {
         return orderRepository.findOne(id);
     }
 
+    public List<DYE_Orders> findAll(Long id){return orderRepository.findAll(id);}
 
-    public DYE_Orders ordersFindOne(Long id) {
-        return orderRepository.ordersFindOne(id);
-    }
+    public List<DYE_Orders> findAccount(Long id){return orderRepository.findByAccountCode(id);}
+
 }
 

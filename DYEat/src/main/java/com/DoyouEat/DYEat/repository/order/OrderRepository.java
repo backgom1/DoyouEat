@@ -28,9 +28,9 @@ public class OrderRepository {
         return em.createQuery("select a from DYE_Orders a",DYE_Orders.class)
                 .getResultList();
     }
-
-
-    public DYE_Orders ordersFindOne(Long id){
-        return em.find(DYE_Orders.class,id);
+    public List<DYE_Orders> findByAccountCode(Long id){
+        return em.createQuery("select a from DYE_Orders a where Account_Code=" + id ,DYE_Orders.class)
+                .getResultList();
     }
+
 }

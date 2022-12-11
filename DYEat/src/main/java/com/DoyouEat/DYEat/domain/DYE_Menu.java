@@ -60,7 +60,7 @@ public class DYE_Menu {
     private List<DYE_Images> menu_images = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "DYEMenu")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "DYEMenu")
     private List<DYE_Orders> menu_orders = new ArrayList<>();
 
     @JsonIgnore

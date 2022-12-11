@@ -118,7 +118,7 @@
             <button class="btn-close text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-xxl-flex justify-content-xxl-center">
-            <form th:action="@{/order/buy}" method="post" class="mt-4" style="width: 100%;">
+            <form th:action="@{/order/{id}/buy (id=${menuId.id})}" method="post" class="mt-4" style="width: 100%;">
                 <div class="form-group mb-3">
                     <div class="input-group"><span class="text-primary input-group-text"><i
                             class="fa fa-motorcycle"></i></span>
