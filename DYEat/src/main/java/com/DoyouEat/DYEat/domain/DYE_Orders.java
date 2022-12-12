@@ -30,7 +30,7 @@ public class DYE_Orders {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Account_Code")
+    @JoinColumn(name="Orders_Account_Code")
     private DYE_Account DYEAccount;
 
     @JsonIgnore
@@ -45,6 +45,9 @@ public class DYE_Orders {
 
     @Column(name = "Orders_Status")
     private int status;
+
+    @Column(name = "Orders_Quantity")
+    private int quantity;
 
     @Column(name="Order_WantDate", length =50)
     private String wantdate;

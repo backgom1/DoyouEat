@@ -29,7 +29,7 @@ public class OrderRepository {
                 .getResultList();
     }
     public List<DYE_Orders> findByAccountCode(Long id){
-        return em.createQuery("select a from DYE_Orders a where Account_Code=" + id ,DYE_Orders.class)
+        return em.createQuery("select a from DYE_Orders a where Orders_Account_Code=" + id ,DYE_Orders.class)
                 .getResultList();
     }
 
