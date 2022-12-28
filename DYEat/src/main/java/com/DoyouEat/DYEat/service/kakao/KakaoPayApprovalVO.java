@@ -16,5 +16,4 @@ public class KakaoPayApprovalVO {
     private Integer quantity, tax_free_amount, vat_amount;
     private Date created_at, approved_at;
 
-
 }

@@ -32,6 +32,7 @@ public class orderController {
         dye_orders.setHow(orderForm.getHow());
         dye_orders.setWantdate(orderForm.getWantdate());
         dye_orders.setPrice(orderForm.getPrice());
+        dye_orders.setQuantity(orderForm.getResult());
         DYE_Account account = principalDetails.getAccount();
         DYE_Menu dye_menu = menuService.menuFindOne(id);
         dye_orders.setDYEAccount(account);

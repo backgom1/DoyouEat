@@ -8,6 +8,7 @@ public class OrderForm {
 
     private String wantdate;
     private String how;
+    private int result;
     private int price;
 
 }

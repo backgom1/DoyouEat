@@ -3,6 +3,7 @@ package com.DoyouEat.DYEat.controller.mybag;
 import com.DoyouEat.DYEat.domain.DYE_Menu;
 import com.DoyouEat.DYEat.domain.DYE_Orders;
 import com.DoyouEat.DYEat.repository.menu.menuFile.MenuFile;
+import com.DoyouEat.DYEat.repository.order.OrderApiRepository;
 import com.DoyouEat.DYEat.service.menu.MenuService;
 import com.DoyouEat.DYEat.service.order.OrderService;
 import com.DoyouEat.DYEat.service.security.CustomDetails;
@@ -14,12 +15,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
+import java.net.http.HttpClient;
 import java.util.List;
 
 @Controller
@@ -29,8 +28,9 @@ public class mybagController {
 
     private final OrderService orderService;
     private final MenuService menuService;
-
     private final MenuFile menuFile;
+
+    private final OrderApiRepository orderApiRepository;
 
     @GetMapping
     @Transactional
@@ -41,6 +41,12 @@ public class mybagController {
         model.addAttribute("MyOrder",all);
         model.addAttribute("MyMenu",dye_menus);
         return "views/mybag/mybag";
+    }
+
+    @PostMapping("/delete")
+    public String deleteMyBag(@RequestParam("delList") List<Integer> ids){
+        for(Integer id : ids) orderApiRepository.deleteById(Long.valueOf(id));
+        return "redirect:/mybag";
     }
 
     @ResponseBody

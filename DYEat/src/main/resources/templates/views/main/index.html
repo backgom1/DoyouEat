@@ -43,12 +43,12 @@
                     <p class="w-lg-50"></p>
                 </div>
                 <div class="col-lg-4 col-xxl-4 d-lg-flex justify-content-lg-end align-items-lg-center"
-                     style="text-align: center;"><a th:href="@{/order/list}" style="text-decoration: none;">
+                     style="text-align: center;"><a th:href="@{/order/list}"  style="text-decoration: none;">
                     <p style="text-align: center;font-family: Adamina, serif;"><i class="fas fa-plus-square"></i>더보기</p>
                 </a></div>
             </div>
             <div class="row gx-2 gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3 photos" data-bss-baguettebox="">
-                <div th:each="Menulist : ${menuData}" class="col offset-xxl-1 item"><a
+                <div th:each="Menulist : ${menuData}" th:if="${Menulist.type == 1}" class="col offset-xxl-1 item"><a
                         th:href="@{/order/{id}/detail (id=${Menulist.id})}"
                         style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
                         class="rounded img-fluid border" th:src="|/images/${Menulist.picture}|">
@@ -64,153 +64,63 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto" style="text-align: left;">
-                    <h2 style="text-align: left;font-family: Adamina, serif;"><strong>정기 배송 간단식</strong></h2>
-                    <p class="w-lg-50"></p>
-                </div>
-                <div class="col-lg-4 d-lg-flex justify-content-lg-end align-items-lg-center"><a href="#"
-                                                                                                style="text-decoration: none;">
-                    <p style="text-align: right;font-family: Adamina, serif;"><i class="fas fa-plus-square"></i>더보기</p>
-                </a></div>
-            </div>
-            <div class="row gx-2 gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3 photos" data-bss-baguettebox="">
-                <div class="col offset-xxl-1 item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
-                                                      style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
-                </a></div>
-                <div class="col offset-xxl-2 item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
-                                                      style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
-                </a></div>
-            </div>
-        </div>
-    </section>
-    <section class="photo-gallery py-4 py-xl-5">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md-8 col-xl-6 text-center mx-auto" style="text-align: left;">
                     <h2 style="text-align: left;font-family: Adamina, serif;"><strong>단품 메뉴</strong></h2>
                     <p class="w-lg-50"></p>
                 </div>
-                <div class="col-lg-4 d-lg-flex justify-content-lg-end align-items-lg-center"><a href="#"
+                <div class="col-lg-4 d-lg-flex justify-content-lg-end align-items-lg-center"><a th:href="@{/order/list}"
                                                                                                 style="text-decoration: none;">
                     <p style="text-align: right;font-family: Adamina, serif;"><i class="fas fa-plus-square"></i>더보기</p>
                 </a></div>
             </div>
             <div class="row gx-2 gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3 photos" data-bss-baguettebox="">
-                <div class="col-lg-4 col-xxl-3 offset-xxl-1 item"><a
-                        href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
+                <div th:each="Menulist : ${menuData}" th:if="${Menulist.type == 2}" class="col offset-xxl-1 item"><a
+                        th:href="@{/order/{id}/detail (id=${Menulist.id})}"
                         style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
-                </a></div>
-                <div class="col-lg-4 col-xxl-3 offset-xxl-1 item"><a
-                        href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
-                        style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
-                </a></div>
-                <div class="col-lg-4 col-xxl-3 offset-xxl-1 item"><a
-                        href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
-                        style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
-                </a></div>
-                <div class="col-lg-4 col-xxl-3 offset-xxl-1 item"><a
-                        href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
-                        style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
-                </a></div>
-                <div class="col-lg-4 col-xxl-3 offset-xxl-1 item"><a
-                        href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
-                        style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
-                </a></div>
-                <div class="col-lg-4 col-xxl-3 offset-xxl-1 item"><a
-                        href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
-                        style="border-bottom-color: rgba(13,110,253,0); text-decoration: none;"><img
-                        class="rounded img-fluid border" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;"><span
-                            style="background-color: rgba(255, 255, 255, 0);">ㅋㅋㅋ</span></h2>
-                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;">Paragraph</p>
+                        class="rounded img-fluid border" th:src="|/images/${Menulist.picture}|">
+                    <h2 class="fs-1 text-center" style="color: rgb(0,0,0);font-family: Adamina, serif;">
+                        <span style="background-color: rgba(255, 255, 255, 0);" th:text="${Menulist.title}"></span></h2>
+                    <p class="text-center" style="color: rgb(145,147,149);font-family: Adamina, serif;"
+                       th:text="${Menulist.price}"></p>
                 </a></div>
             </div>
         </div>
     </section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-xxl-12 offset-xxl-0">
-                <h2 style="text-align: left;font-family: Adamina, serif;padding-left: 0px;margin-left: 44px;">
-                    <strong>리뷰</strong></h2><a href="#" style="text-decoration: none;">
-                <p style="text-align: right;font-family: Adamina, serif;"><i class="fas fa-plus-square"></i>더보기</p>
-            </a>
-            </div>
-            <div class="col d-flex justify-content-center" style="width: 100%;">
-                <div style="width: 85%;">
-                    <table class="table table-striped table-bordered" id="example" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th style="width: 80%;">리뷰</th>
-                            <th>작성자</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>존맛탱</td>
-                            <td>이은성</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Products End -->
 
 
     <!-- Footer Start -->
-    <footer>
-        <div class="row">
-            <div class="col-sm-6 col-md-4 footer-navigation">
-                <p class="links"><a href="#">Home</a><strong> · </strong><a href="#">Blog</a><strong> · </strong><a
-                        href="#">Pricing</a><strong> · </strong><a href="#">About</a><strong> · </strong><a
-                        href="#">Faq</a><strong> · </strong><a href="#">Contact</a></p>
-                <p class="company-name"></p>
-            </div>
-            <div class="col-sm-6 col-md-4 footer-contacts">
-                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
-                    <p><span class="new-line-span"></span>Seoul, Korea</p>
-                </div>
-                <div><i class="fa fa-phone footer-contacts-icon"></i>
-                    <p class="footer-center-info email text-start">1234-5678</p>
-                </div>
-                <div><i class="fa fa-envelope footer-contacts-icon"></i>
-                    <p><a href="#" target="_blank">dmstjd0214@naver.com</a></p>
-                </div>
-            </div>
-            <div class="col-md-4 footer-about">
-                <h4>간단한 포트폴리오입니다.</h4>
-                <p> 이쁘게 봐주세요 !</p>
-                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-                        class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-github"></i></a></div>
-            </div>
+    <footer class="text-center bg-dark">
+        <div class="container text-white py-4 py-lg-5">
+            <ul class="list-inline">
+                <li class="list-inline-item me-4">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">이은성</li>
+                    </ul>
+                </li>
+                <li class="list-inline-item me-4">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">dmstjd0214@naver.com</li>
+                    </ul>
+                </li>
+                <li class="list-inline-item">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">010-4134-7376</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-inline">
+                <li class="list-inline-item me-4"><svg class="bi bi-facebook text-light" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
+                </svg></li>
+                <li class="list-inline-item me-4"><a href="https://silvercastle.notion.site/_-bae6a2484ec4469c99d35bb129a1c9f6"><svg class="bi bi-person-video text-light" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path>
+                    <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2Zm10.798 11c-.453-1.27-1.76-3-4.798-3-3.037 0-4.345 1.73-4.798 3H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1.202Z"></path>
+                </svg></a></li>
+                <li class="list-inline-item"><a href="https://github.com/backgom1"><svg class="bi bi-github text-light" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg></a></li>
+            </ul>
+            <p class="text-muted mb-0">Copyright © 2022 DoyouEat</p>
         </div>
     </footer>
     <!-- Footer End -->

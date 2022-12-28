@@ -1,8 +1,8 @@
 package com.DoyouEat.DYEat.controller.delivery;
 
-import com.DoyouEat.DYEat.domain.DYE_Menu;
-import com.DoyouEat.DYEat.domain.DYE_Orders;
+import com.DoyouEat.DYEat.domain.*;
 import com.DoyouEat.DYEat.repository.menu.menuFile.MenuFile;
+import com.DoyouEat.DYEat.service.delivery.DeliveryService;
 import com.DoyouEat.DYEat.service.kakao.KakaoPay;
 import com.DoyouEat.DYEat.service.kakao.KakaoPayApprovalVO;
 import com.DoyouEat.DYEat.service.kakao.MenuVO;
@@ -39,10 +39,12 @@ public class deliveryController {
     private final KakaoPay kakaopay;
     private final MenuFile menuFile;
 
+    private final DeliveryService deliveryService;
 
     //결제 정보 띄우는것
     @GetMapping("/pay")
-    public String payment(@AuthenticationPrincipal CustomDetails principalDetails, Model model) {
+    public String payment(@AuthenticationPrincipal CustomDetails principalDetails, Model model, @ModelAttribute DeliveryForm deliveryForm,
+                          @ModelAttribute PayForm payForm) {
         Long principal_delivery_id = principalDetails.getAccount().getId();
         log.info("long={}", principal_delivery_id);
         List<DYE_Orders> all = orderService.findAccount(principal_delivery_id);
@@ -66,18 +68,44 @@ public class deliveryController {
     }
 
     @PostMapping("/kakaoPay")
-    public String kakaoPay(@AuthenticationPrincipal CustomDetails principalDetails) {
+    public String kakaoPay(@AuthenticationPrincipal CustomDetails principalDetails, @ModelAttribute DeliveryForm deliveryForm,
+                           @ModelAttribute PayForm payForm) {
         log.info("kakaoPay post............................................");
-        return "redirect:" + kakaopay.kakaoPayReady(principalDetails);
+        DYE_Account account = principalDetails.getAccount();
+        DYE_Delivery dye_delivery = new DYE_Delivery();
+        DYE_Payment dye_payment = new DYE_Payment();
+        //0 배송 준비중 , 1 배송 진행중 , 2 배송 도착
+        dye_delivery.setStatus(0);
+
+        dye_delivery.setStreet(deliveryForm.getStreet());
+        dye_delivery.setAddress(deliveryForm.getAddress());
+        dye_delivery.setName(deliveryForm.getUserName());
+        dye_delivery.setDYEAccount(account);
+
+        deliveryService.saveDelivery(dye_delivery);
+
+        return "redirect:" + kakaopay.kakaoPayReady(principalDetails,deliveryForm,payForm);
 
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model,@AuthenticationPrincipal CustomDetails principalDetails) {
+    public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model,@AuthenticationPrincipal CustomDetails principalDetails,@ModelAttribute DeliveryForm deliveryForm,
+                                  @ModelAttribute PayForm payForm) {
+        log.info("값4={}", deliveryForm.getStreet());
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token,principalDetails);
-        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token,principalDetails));
+        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token,principalDetails,deliveryForm,payForm));
 
+        DYE_Account account = principalDetails.getAccount();
+        DYE_Delivery dye_delivery = new DYE_Delivery();
+        DYE_Payment dye_payment = new DYE_Payment();
+
+        dye_payment.setPayWay("KakaoPay");
+        dye_payment.setPayCheck(true);
+        dye_payment.setDYEAccount(account);
+        dye_payment.setDye_delivery(dye_delivery);
+
+        deliveryService.savePay(dye_payment);
         return "views/test/kakaoPaySuccess";
     }
 

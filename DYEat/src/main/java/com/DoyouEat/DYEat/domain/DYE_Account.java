@@ -79,6 +79,10 @@ public class DYE_Account {
 
     @JsonIgnore
     @OneToMany(mappedBy = "DYEAccount")
+    private List<DYE_Delivery> account_delivery = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "DYEAccount")
     private List<DYE_Review> account_DYE_reviews = new ArrayList<>();
 
     @JsonIgnore

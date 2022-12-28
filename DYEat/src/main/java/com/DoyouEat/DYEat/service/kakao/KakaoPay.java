@@ -1,6 +1,8 @@
 package com.DoyouEat.DYEat.service.kakao;
 
 
+import com.DoyouEat.DYEat.controller.delivery.DeliveryForm;
+import com.DoyouEat.DYEat.controller.delivery.PayForm;
 import com.DoyouEat.DYEat.domain.DYE_Images;
 import com.DoyouEat.DYEat.domain.DYE_Menu;
 import com.DoyouEat.DYEat.domain.DYE_Orders;
@@ -16,6 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,11 +36,16 @@ public class KakaoPay {
     private KakaoPayReadyVO kakaoPayReadyVO;
     private KakaoPayApprovalVO kakaoPayApprovalVO;
 
+    private PayForm payDto;
+
+    private DeliveryForm deliveryDto;
+
     private final MenuService menuService;
 
     private final OrderService orderService;
 
-    public String kakaoPayReady(@AuthenticationPrincipal CustomDetails principalDetails) {
+    public String kakaoPayReady(@AuthenticationPrincipal CustomDetails principalDetails, @ModelAttribute DeliveryForm deliveryForm,
+                                @ModelAttribute PayForm payForm) {
 
         Long id = principalDetails.getAccount().getId();
         DYE_Menu dye_menu = menuService.menuFindOne(id);
@@ -45,6 +53,7 @@ public class KakaoPay {
 
         log.info("값={}", dye_menu);
         log.info("값2={}", dye_orders);
+        log.info("값3={}", deliveryForm.getStreet());
 
         RestTemplate restTemplate = new RestTemplate();
         // 서버로 요청할 Header
@@ -65,11 +74,12 @@ public class KakaoPay {
         params.add("cancel_url", "http://localhost:8080/delivery/pay");
         params.add("fail_url", "http://localhost:8080/delivery/pay/fail");
 
+
+
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
         try {
             kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
-
 
             return kakaoPayReadyVO.getNext_redirect_pc_url();
 
@@ -81,13 +91,15 @@ public class KakaoPay {
             e.printStackTrace();
         }
 
-        return "/pay";
+        return "/delivery/kakaoPaySuccess";
 
     }
 
 
-    public KakaoPayApprovalVO kakaoPayInfo(String pg_token, @AuthenticationPrincipal CustomDetails principalDetails) {
+    public KakaoPayApprovalVO kakaoPayInfo(String pg_token, @AuthenticationPrincipal CustomDetails principalDetails, @ModelAttribute DeliveryForm deliveryForm,
+                                           @ModelAttribute PayForm payForm) {
 
+        log.info("값4={}", deliveryForm.getStreet());
 
         Long id = principalDetails.getAccount().getId();
         DYE_Orders dye_orders = orderService.findById(id);

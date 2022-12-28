@@ -11,12 +11,13 @@
     <div class="container-fluid top-container">
         <div class="row">
             <div class="col-12 col-md-6 col-xl-4 offset-xl-2">
-                <div class="img-container"><img class="rounded" id="expandedImg" width="450px" height="450px"
+                <div class="img-container"><img class="rounded" id="expandedImg" style="width: 400px; height: 400px;"
                                                 th:src="|/images/${menuId.picture}|">
                     <div id="imgtext"></div>
                 </div>
                 <div class="row img-row" style="padding-right: 10px;padding-left: 10px;">
                     <div th:each="imageList : ${menuId.menu_images}" class="col column"><img
+                            style="width: 100px; height: 100px;"
                             class="img-thumbnail img-fluid" th:src="|/images/${imageList.getSaveName()}|"
                             onclick="myFunction(this);" alt="image 1"></div>
                 </div>
@@ -57,21 +58,51 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-xxl-12 offset-xxl-0 d-xxl-flex justify-content-xxl-end">
-                    <button class="btn btn-primary d-xxl-flex" type="button">구매평 작성</button>
+                    <a class="btn btn-primary btn-sm" role="button" href="#myModal" data-bs-toggle="modal">댓글 작성</a>
                 </div>
+
+                <!-- Modal 댓글 작성 부분 -->
+                <div id="myModal" class="modal fade" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <h4>댓글 작성</h4>
+                                    <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span
+                                                class="input-group-text icon-container"><i class="fa fa-comment-o"></i></span>
+                                        </div>
+                                        <input id="boardId" class="form-control form-control" type="hidden" th:value="${menuId.id}"/>
+                                        <input required id="com_content" class="form-control form-control" type="text" placeholder="댓글을 입력하세요"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-light" type="button" data-bs-dismiss="modal">취소</button>
+                                    <button class="btn btn-primary" id="com-btn-save" type="button">작성</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal 작성 부분 끝-->
+
                 <div class="col d-flex justify-content-center" style="width: 100%;">
                     <div style="width: 85%;">
                         <table class="table table-striped table-bordered" id="example" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th style="width: 80%;">구매평</th>
                                 <th>작성자</th>
+                                <th style="width: 80%; text-align: right;">구매평</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td><img>존맛탱</td>
-                                <td>이은성</td>
+                            <tr th:each="review : ${reviews}">
+                                <td th:text="${review.DYEAccount.nickname}">이은성</td>
+                                <td style="text-align: right;" th:text="${review.text}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -124,22 +155,22 @@
                             class="fa fa-motorcycle"></i></span>
 
                         <select name="how" class="form-select">
-                        <option value="undefined" selected>배송을 선택해주세요</option>
-                        <option value="전날 배송">전날 배송</option>
-                        <option value="오전 배송">오전 배송</option>
-                    </select></div>
+                            <option value="undefined" selected>배송을 선택해주세요</option>
+                            <option value="전날 배송">전날 배송</option>
+                            <option value="오전 배송">오전 배송</option>
+                        </select></div>
                 </div>
                 <div class="form-group mb-3">
                     <div class="input-group"><span class="text-primary input-group-text"><i
                             class="fa fa-calendar-o"></i></span>
                         <select name="wantdate" class="form-select">
-                        <option value="undefined" selected>날짜를 입력해주세요</option>
-                        <option value="월요일">월</option>
-                        <option value="화요일">화</option>
-                        <option value="수요일">수</option>
-                        <option value="목요일">목</option>
-                        <option value="금요일">금</option>
-                    </select>
+                            <option value="undefined" selected>날짜를 입력해주세요</option>
+                            <option value="월요일">월</option>
+                            <option value="화요일">화</option>
+                            <option value="수요일">수</option>
+                            <option value="목요일">목</option>
+                            <option value="금요일">금</option>
+                        </select>
                     </div>
                     <br>
                     <div class="d-flex justify-content-start">
@@ -147,15 +178,18 @@
                         <input type='button'
                                onclick='count("plus")'
                                value='+'/>
-                        <div id='result'>1</div>
+                        <input readonly type="text" id='result' name="result" value="1"
+                               style="width: 10px; border: 0px;"/>
                         <input type='button'
                                onclick='count("minus")'
                                value='-'/>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start">
-                    <label name="price" class="form-label">가격 : </label><input style="border: 0px" type="text" id='price'
-                                                                  name="price" th:value="|${menuId.price}|" readonly/>
+                    <label name="price" class="form-label">가격 : </label><input style="border: 0px" type="text"
+                                                                               id='price'
+                                                                               name="price" th:value="|${menuId.price}|"
+                                                                               readonly/>
                     <input id='stop_price' name="price" hidden="hidden" th:value="|${menuId.price}|"/>
                 </div>
                 <button class="btn btn-primary" type="submit">구매하기</button>
@@ -171,7 +205,7 @@
             const stop_priceElement = document.getElementById('stop_price');
 
             // 현재 화면에 표시된 값
-            let number = resultElement.innerText;
+            let number = resultElement.value;
             let price = priceElement.value;
             let stop_price = stop_priceElement.value;
 
@@ -186,7 +220,7 @@
 
             }
             // 결과 출력
-            resultElement.innerText = number
+            resultElement.value = number
             priceElement.value = price
         }
     </script>

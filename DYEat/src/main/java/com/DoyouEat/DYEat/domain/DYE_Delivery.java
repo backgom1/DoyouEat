@@ -26,12 +26,17 @@ public class DYE_Delivery {
     private Long id;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "dye_delivery", fetch = LAZY)
+    @OneToOne(mappedBy = "dye_delivery", fetch = LAZY, cascade = CascadeType.ALL)
     private DYE_Orders dye_orders;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "dye_delivery", fetch = LAZY)
+    @OneToOne(mappedBy = "dye_delivery", fetch = LAZY, cascade = CascadeType.ALL)
     private DYE_Payment dye_payment;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="Delivery_Account_Code")
+    private DYE_Account DYEAccount;
 
     @Column(name="Delivery_Address", length =50)
     private String address;
@@ -46,7 +51,7 @@ public class DYE_Delivery {
     private String email;
 
     @Column(name = "Delivery_PhoneNumber")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @Column(name="Delivery_Type")
     private int type;

@@ -23,16 +23,16 @@
                 <div class="form-floating mb-3" style="width: 100%">
                     <input class="form-control" th:value="${signupForm.newDate}" type="hidden" name="제목"
                            placeholder="자동 날짜"/>
-                    <input th:field="*{username}"  name="EmailInput" id="EmailInput" class="form-control" type="email" placeholder="이메일@"
+                    <input th:field="*{username}" th:value="${signupForm.username}" name="EmailInput" id="EmailInput" class="form-control" type="text" placeholder="이메일@"
                            th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'"
                            style="height: 60px;">
                     <label for="EmailInput">이메일 아이디</label>
                     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">이메일 양식 맞추세요</p>
                 </div>
-                <input class="btn btn-primary" type="button" id="userCheck" name="userCheck" value="중복 검사"
-                       style="width: 25%;height: 60px;margin-left: 5px; text-align: center;font-size: 17px;background: rgb(32,113,250);border-color: rgb(255,255,255);"/>
-                <span id="result"></span>
+                <button class="btn btn-primary" type="button" id='userCheck' name="userCheck"
+                       style="width: 25%;height: 60px;margin-left: 5px; text-align: center;font-size: 17px;background: rgb(32,113,250);border-color: rgb(255,255,255);">중복 검사</button>
             </div>
+            <span id="result"></span>
             <br>
             <div class="d-flex justify-content-start">
                 <div class="form-floating mb-3" style="width: 100%">
@@ -66,11 +66,12 @@
                     <p th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">닉네임 양식 맞추세요</p>
 
                 </div>
-                <a class="btn btn-primary" type="button"
+                <button id="nicknameCheck" class="btn btn-primary" type="button"
                    style="width: 25%;margin-left: 5px;height: 60px;text-align: center;font-size: 15px;font-weight: bold;background: rgb(32,113,250);border-color: rgb(255,255,255);">
                     닉네임 검사
-                </a>
+                </button>
             </div>
+            <span id="nick_result"></span>
 
             <hr style="margin-top: 30px;margin-bottom: 10px;">
             <div class="form-group mb-3">

@@ -40,13 +40,19 @@
                                         <div class="text-center border rounded-0 shadow-sm profile-box"
                                              style="width: 50%;height: 100%;background-color: #ffffff;margin: 5px;">
                                             <div style="height: 50px;background: rgba(54,162,177,0);"></div>
-                                            <div sec:authorize="isAuthenticated()"><img class="rounded-circle" th:src="${img}" width="60px"
+                                            <div sec:authorize="isAuthenticated()"><img class="rounded-circle"
+                                                                                        th:src="${img}" width="60px"
                                                                                         height="60px"
-                                                                                        style="background-color: rgb(255,255,255);padding: 2px;"></div>
-                                            <div sec:authorize="!isAuthenticated()"><img class="rounded-circle" src="assets/img/bg-cta.jpg" width="60px"
-                                                      height="60px"
-                                                      style="background-color: rgb(255,255,255);padding: 2px;"></div>
-                                            <div sec:authorize="hasRole('ROLE_USER')" style="height: 80%"  class="text-right">
+                                                                                        style="background-color: rgb(255,255,255);padding: 2px;">
+                                            </div>
+                                            <div sec:authorize="!isAuthenticated()"><img class="rounded-circle"
+                                                                                         src="assets/img/bg-cta.jpg"
+                                                                                         width="60px"
+                                                                                         height="60px"
+                                                                                         style="background-color: rgb(255,255,255);padding: 2px;">
+                                            </div>
+                                            <div sec:authorize="hasRole('ROLE_USER')" style="height: 80%"
+                                                 class="text-right">
                                                 <p th:text="|${greeting}님 반갑습니다.|"></p>
                                             </div>
                                         </div>
@@ -62,13 +68,24 @@
                                                 <thead>
                                                 <tr>
                                                     <th>주문 이름</th>
+                                                    <th>가격</th>
+                                                    <th>수량</th>
+                                                    <th>결제 방식</th>
+                                                    <th>결제 상태</th>
                                                     <th>날짜</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td style="width: 80%;">Cell 1</td>
-                                                    <td style="text-align: right;">Cell 2</td>
+                                                <tr th:each="deliveryList : ${deliveryList}">
+                                                    <td>
+                                                    </td>
+                                                    <td th:text="${deliveryList.dye_orders.price}"></td>
+                                                    <td th:text="${deliveryList.dye_orders.quantity}"></td>
+                                                    <td th:text="${deliveryList.dye_payment.payWay}"></td>
+                                                    <td th:text="${deliveryList.dye_payment.payCheck}"></td>
+                                                    <td style="text-align: center;" th:text="${deliveryList.newDate}">
+                                                        Cell 2
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -84,12 +101,20 @@
                                         <div class="text-center border rounded-0 shadow-sm profile-box"
                                              style="width: 50%;height: 100%;background-color: #ffffff;margin: 5px;">
                                             <div style="height: 50px;background: rgba(54,162,177,0);"></div>
-                                            <div><img class="rounded-circle" src="assets/img/bg-cta.jpg" width="60px"
-                                                      height="60px"
-                                                      style="background-color: rgb(255,255,255);padding: 2px;"></div>
-                                            <div style="height: 80px;">
-                                                <h4>님 반갑습니다.</h4>
-                                                <p style="font-size: 12px;"></p>
+                                            <div sec:authorize="isAuthenticated()"><img class="rounded-circle"
+                                                                                        th:src="${img}" width="60px"
+                                                                                        height="60px"
+                                                                                        style="background-color: rgb(255,255,255);padding: 2px;">
+                                            </div>
+                                            <div sec:authorize="!isAuthenticated()"><img class="rounded-circle"
+                                                                                         src="assets/img/bg-cta.jpg"
+                                                                                         width="60px"
+                                                                                         height="60px"
+                                                                                         style="background-color: rgb(255,255,255);padding: 2px;">
+                                            </div>
+                                            <div sec:authorize="hasRole('ROLE_USER')" style="height: 80%"
+                                                 class="text-right">
+                                                <p th:text="|${greeting}님 반갑습니다.|"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +123,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h1 class="d-xxl-flex justify-content-xxl-center" style="margin-top: 22px;">
-                                            주문조회</h1>
+                                            주문 취소 / 교환 내역</h1>
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -125,20 +150,22 @@
         </div>
         <div class="modal fade" role="dialog" tabindex="-1" id="exampleModal" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body"><span> ... </span></div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="button">Save changes</button>
+            <form th:action="@{/mypage/update}">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">회원 정보 수정</h5>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">닫기</button>
+                            <button class="btn btn-primary" type="submit">수정하기</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="modal fade" role="dialog" tabindex="-1" id="exampleModal-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
@@ -151,7 +178,9 @@
                     <div class="modal-body"><span>정말 삭제를 하시겠습니까?<br>기존에 주문한 음식들은 환불하기 어렵습니다.<br></span></div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
-                        <button class="btn btn-primary" type="button">삭제</button>
+                        <a th:each="deliveryList : ${deliveryList}"
+                           th:href="@{/mypage/{id}/delete (id=${deliveryList.id})}" class="btn btn-primary"
+                           type="button">삭제</a>
                     </div>
                 </div>
             </div>

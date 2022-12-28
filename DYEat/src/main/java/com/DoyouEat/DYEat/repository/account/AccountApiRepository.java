@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface AccountApiRepository extends JpaRepository<DYE_Account,Long> {
 
     DYE_Account findByUsername(String username);
-    Optional<DYE_Account> findById(Long id);
 
 
 }

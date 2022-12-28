@@ -1,6 +1,10 @@
 package com.DoyouEat.DYEat.controller.event;
 
+import com.DoyouEat.DYEat.controller.menu.ImageForm;
+import com.DoyouEat.DYEat.controller.menu.MenuForm;
+import com.DoyouEat.DYEat.controller.order.OrderForm;
 import com.DoyouEat.DYEat.domain.DYE_Event;
+import com.DoyouEat.DYEat.domain.DYE_Menu;
 import com.DoyouEat.DYEat.repository.menu.menuFile.MenuFile;
 import com.DoyouEat.DYEat.service.event.EventService;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +65,15 @@ public class eventController {
 
         eventService.saveMenus(dye_event);
         return "redirect:/event";
+    }
+
+    @GetMapping("/{id}/detail")
+    public String items(@ModelAttribute EventForm form, @PathVariable Long id, Model model) throws IOException {
+        DYE_Event event = eventService.findById(id);
+        form.setTitle(event.getTitle());
+        form.setText(event.getText());
+        model.addAttribute("eventId", event);
+        return "/views/event/eventDetail";
     }
 
     @ResponseBody

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/layout}">
+<th:block layout:fragment="content">
+    <body>
+    <div class="container py-4 py-xl-5">
+        <h1 th:text="${eventId.title}"></h1>
+        <div class="text-center">
+            <img th:src="|/images/${eventId.picture_save}|" width="700"/></div>
+    </div>
+    </body>
+</th:block>

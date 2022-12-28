@@ -48,7 +48,7 @@
                             <div id="form-content-1" class="multisteps-form__content" style="width: 100%">
                                 <div id="input-grp-double-1" class="form-row mt-4" style="width: 100%" >
                                     <div class="d-flex justify-content-start col-12 col-sm-6" style="width: 100%" >
-                                        <label style="width: 10%; margin-top: 10px">이벤트 이름 :  </label><input
+                                        <label style="width: 10%; margin-top: 10px">이벤트 이름 :</label><input
                                             style="width: 90%"
                                             class="form-control multisteps-form__input"
                                             type="text" name="menuName" placeholder="이벤트 이름"/></div>
@@ -79,11 +79,10 @@
                                                                placeholder="내용을 입력해주세요"/></div>
                                 </div>
                                 <div class="col-12 col-sm-6 mt-4 mt-sm-0" style="width: 100%">
-                                    <select class="form-select" style="width: 100%">
-                                        <optgroup name="onoff" label>
-                                            <option th:value="0">종료된 이벤트</option>
-                                            <option th:value="1">진행중인 이벤트</option>
-                                        </optgroup>
+                                    <select name="onoff" class="form-select">
+                                        <option value="undefined" selected>이벤트를 입력해주세요</option>
+                                        <option value="0">진행 이벤트</option>
+                                        <option value="1">종료 이벤트</option>
                                     </select>
                                 </div>
                                 <div id="next-prev-buttons-1" class="button-row d-flex mt-4">
