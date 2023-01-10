@@ -40,19 +40,25 @@
                                         <div class="text-center border rounded-0 shadow-sm profile-box"
                                              style="width: 50%;height: 100%;background-color: #ffffff;margin: 5px;">
                                             <div style="height: 50px;background: rgba(54,162,177,0);"></div>
-                                            <div sec:authorize="isAuthenticated()"><img class="rounded-circle"
-                                                                                        th:src="${img}" width="60px"
-                                                                                        height="60px"
-                                                                                        style="background-color: rgb(255,255,255);padding: 2px;">
+                                            <div th:if="${accountList.provider.toString().equals('kakao')}"><img
+                                                    class="rounded-circle"
+                                                    th:src="${img}" width="120px"
+                                                    height="120px"
+                                                    style="background-color: rgb(255,255,255);padding: 2px;">
                                             </div>
-                                            <div sec:authorize="!isAuthenticated()"><img class="rounded-circle"
-                                                                                         src="assets/img/bg-cta.jpg"
-                                                                                         width="60px"
-                                                                                         height="60px"
-                                                                                         style="background-color: rgb(255,255,255);padding: 2px;">
+                                            <div th:if="${accountList.provider.toString().equals('google')}"><img
+                                                    class="rounded-circle"
+                                                    th:src="@{/assets/img/normal_image.png}" width="120px"
+                                                    height="120px"
+                                                    style="background-color: rgb(255,255,255);padding: 2px;">
                                             </div>
-                                            <div sec:authorize="hasRole('ROLE_USER')" style="height: 80%"
-                                                 class="text-right">
+                                            <div th:unless="${accountList.provider.toString().equals('google') && accountList.picture == null}">
+                                                <img class="rounded-circle"
+                                                     th:src="|/images/${accountList.picture}|" width="120px"
+                                                     height="120px"
+                                                     style="background-color: rgb(255,255,255);padding: 2px;">
+                                            </div>
+                                            <div>
                                                 <p th:text="|${greeting}님 반갑습니다.|"></p>
                                             </div>
                                         </div>
@@ -70,22 +76,19 @@
                                                     <th>주문 이름</th>
                                                     <th>가격</th>
                                                     <th>수량</th>
-                                                    <th>결제 방식</th>
-                                                    <th>결제 상태</th>
-                                                    <th>날짜</th>
+                                                    <th style="text-align: center;">날짜</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr th:each="deliveryList : ${deliveryList}">
-                                                    <td>
-                                                    </td>
-                                                    <td th:text="${deliveryList.dye_orders.price}"></td>
-                                                    <td th:text="${deliveryList.dye_orders.quantity}"></td>
-                                                    <td th:text="${deliveryList.dye_payment.payWay}"></td>
-                                                    <td th:text="${deliveryList.dye_payment.payCheck}"></td>
-                                                    <td style="text-align: center;" th:text="${deliveryList.newDate}">
-                                                        Cell 2
-                                                    </td>
+                                                <tr th:each="orderLists : ${orderList}">
+                                                    <td th:text="${orderLists.DYEMenu.title}"></td>
+                                                    <td th:text="${orderLists.DYEMenu.price}"></td>
+                                                    <td th:text="${orderLists.quantity}"></td>
+                                                    <td style="text-align: center;"
+                                                        th:text="${orderLists.newDate}"></td>
+                                                    <!--                                                        <td th:text="${orderLists.dye_delivery.dye_payment.payWay}"></td>-->
+                                                    <!--                                                    <td th:text="${orderLists.dye_delivery.newDate}"></td>-->
+                                                    <!--날짜 포맷 -->
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -101,19 +104,25 @@
                                         <div class="text-center border rounded-0 shadow-sm profile-box"
                                              style="width: 50%;height: 100%;background-color: #ffffff;margin: 5px;">
                                             <div style="height: 50px;background: rgba(54,162,177,0);"></div>
-                                            <div sec:authorize="isAuthenticated()"><img class="rounded-circle"
-                                                                                        th:src="${img}" width="60px"
-                                                                                        height="60px"
-                                                                                        style="background-color: rgb(255,255,255);padding: 2px;">
+                                            <div th:if="${accountList.provider.toString().equals('kakao')}"><img
+                                                    class="rounded-circle"
+                                                    th:src="${img}" width="100px"
+                                                    height="100px"
+                                                    style="background-color: rgb(255,255,255);padding: 2px;">
                                             </div>
-                                            <div sec:authorize="!isAuthenticated()"><img class="rounded-circle"
-                                                                                         src="assets/img/bg-cta.jpg"
-                                                                                         width="60px"
-                                                                                         height="60px"
-                                                                                         style="background-color: rgb(255,255,255);padding: 2px;">
+                                            <div th:if="${accountList.provider.toString().equals('google') && accountList.picture == null}">
+                                                <img class="rounded-circle"
+                                                     th:src="@{/assets/img/normal_image.png}" width="100px"
+                                                     height="100px"
+                                                     style="background-color: rgb(255,255,255);padding: 2px;">
                                             </div>
-                                            <div sec:authorize="hasRole('ROLE_USER')" style="height: 80%"
-                                                 class="text-right">
+                                            <div th:unless="${accountList.provider.toString().equals('google') && accountList.picture == null}">
+                                                <img class="rounded-circle"
+                                                     th:src="|/images/${accountList.picture}|" width="100px"
+                                                     height="100px"
+                                                     style="background-color: rgb(255,255,255);padding: 2px;">
+                                            </div>
+                                            <div>
                                                 <p th:text="|${greeting}님 반갑습니다.|"></p>
                                             </div>
                                         </div>
@@ -132,10 +141,15 @@
                                                     <th>날짜</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody th:each="orderLists : ${orderList}"
+                                                       th:if="${orderLists.dye_delivery.type == 1}">
                                                 <tr>
-                                                    <td style="width: 80%;">Cell 1</td>
-                                                    <td style="text-align: right;">Cell 2</td>
+                                                    <td style="width: 80%;" th:text="${orderLists.DYEMenu.title}">Cell
+                                                        1
+                                                    </td>
+                                                    <td style="text-align: right;"
+                                                        th:text="${orderLists.dye_delivery.price}">Cell 2
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -156,14 +170,22 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">회원 정보 수정</h5>
                         </div>
-                        <div class="modal-body">
-
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">닫기</button>
-                            <button class="btn btn-primary" type="submit">수정하기</button>
-                        </div>
+                        <form th:action="@{/mypage/update}" }>
+                            <div class="modal-body">
+                                <label>이름</label>
+                                <input class="form-control" type="text" name="username"
+                                       th:value="${accountList.nickname}">
+                                <label>사진</label>
+                                <input class="form-control" type="file" name="picture"
+                                       th:value="${accountList.picture}">
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">닫기</button>
+                                <button class="btn btn-primary" type="submit">수정하기</button>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
             </form>
         </div>
@@ -178,8 +200,7 @@
                     <div class="modal-body"><span>정말 삭제를 하시겠습니까?<br>기존에 주문한 음식들은 환불하기 어렵습니다.<br></span></div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
-                        <a th:each="deliveryList : ${deliveryList}"
-                           th:href="@{/mypage/{id}/delete (id=${deliveryList.id})}" class="btn btn-primary"
+                        <a th:href="@{/mypage/delete}" class="btn btn-primary"
                            type="button">삭제</a>
                     </div>
                 </div>

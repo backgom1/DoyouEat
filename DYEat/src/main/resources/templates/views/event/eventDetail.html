@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{/layouts/layout}">
 <th:block layout:fragment="content">
     <body>
     <div class="container py-4 py-xl-5">
         <h1 th:text="${eventId.title}"></h1>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a th:href="@{/event/admin/{id}/delete (id=${eventId.id})}" class="btn btn-primary" type="button">이벤트 게시판 삭제</a>
+            <a th:href="@{/event/admin/{id}/update (id=${eventId.id})}" class="btn btn-primary" type="button">이벤트 게시판 수정</a>
+        </div>
         <div class="text-center">
             <img th:src="|/images/${eventId.picture_save}|" width="700"/></div>
     </div>

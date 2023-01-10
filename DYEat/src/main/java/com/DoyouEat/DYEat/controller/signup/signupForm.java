@@ -28,4 +28,6 @@ public class signupForm {
     private String provider;
 
     private LocalDateTime newDate;
+
+    private boolean check;
 }

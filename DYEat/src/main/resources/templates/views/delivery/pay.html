@@ -26,7 +26,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each=" order : ${MyOrder}">
+                                    <tr th:each=" order : ${Status}">
                                         <td class="border-0" scope="row">
                                             <div class="p-2"><img th:src="|/images/${order.DYEMenu.picture}|"
                                                                   class="rounded img-fluid shadow-sm"
@@ -132,18 +132,18 @@
                             </div>
                             <div class="col-lg-6 col-xl-12">
                                 <div class="text-uppercase bg-light rounded-pill px-4 py-3 font-weight-bold">
-                                    <span>결제 정보</span></div>
+                                    <span>결제 정보</span> <input readonly style="border: 0px" type="text" name="count" th:value="${#lists.size(Status)}"/></div>
                                 <div class="p-4">
                                     <ul class="list-unstyled mb-4">
                                         <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                                 class="text-muted">결제 합계</strong><strong
-                                                th:text="${#aggregates.sum(MyOrder.![price])}+원">0원</strong></li>
+                                                th:text="${#aggregates.sum(Status.![price])}+원">0원</strong></li>
                                         <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                                 class="text-muted">배송비</strong><strong>0원</strong></li>
                                         <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                                 class="text-muted">종합</strong>
-                                            <h5 class="font-weight-bold"
-                                                th:text="${#aggregates.sum(MyOrder.![price])}+원">0원</h5>
+                                            <input readonly class="font-weight-bold" name="price" style="border: 0px" type="text"
+                                                th:value="${#aggregates.sum(Status.![price])}"/><p>원</p>
                                         </li>
                                     </ul>
                                     <button disabled

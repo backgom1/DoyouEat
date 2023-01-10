@@ -2,6 +2,7 @@ package com.DoyouEat.DYEat.controller.mybag;
 
 import com.DoyouEat.DYEat.domain.DYE_Menu;
 import com.DoyouEat.DYEat.domain.DYE_Orders;
+import com.DoyouEat.DYEat.repository.menu.MenuApiRepository;
 import com.DoyouEat.DYEat.repository.menu.menuFile.MenuFile;
 import com.DoyouEat.DYEat.repository.order.OrderApiRepository;
 import com.DoyouEat.DYEat.service.menu.MenuService;
@@ -30,6 +31,7 @@ public class mybagController {
     private final MenuService menuService;
     private final MenuFile menuFile;
 
+    private final MenuApiRepository menuApiRepository;
     private final OrderApiRepository orderApiRepository;
 
     @GetMapping
@@ -38,8 +40,10 @@ public class mybagController {
         Long id = principalDetails.getAccount().getId();
         List<DYE_Orders> all = orderService.findAccount(id);
         List<DYE_Menu> dye_menus = menuService.findAll(id);
+        List<DYE_Orders> status_list = orderApiRepository.statusFind(id);
         model.addAttribute("MyOrder",all);
         model.addAttribute("MyMenu",dye_menus);
+        model.addAttribute("Status",status_list);
         return "views/mybag/mybag";
     }
 

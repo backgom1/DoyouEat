@@ -9,6 +9,10 @@ public class DeliveryForm {
 
     private String phone;
 
+    private int count;
+
+    private int price;
+
     private String address;
 
     private String street;

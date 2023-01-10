@@ -5,6 +5,7 @@ import com.DoyouEat.DYEat.controller.menu.MenuForm;
 import com.DoyouEat.DYEat.controller.order.OrderForm;
 import com.DoyouEat.DYEat.domain.DYE_Event;
 import com.DoyouEat.DYEat.domain.DYE_Menu;
+import com.DoyouEat.DYEat.repository.event.EventApiRepository;
 import com.DoyouEat.DYEat.repository.menu.menuFile.MenuFile;
 import com.DoyouEat.DYEat.service.event.EventService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,8 @@ public class eventController {
     private final EventService eventService;
     private final MenuFile menuFile;
 
+    private final EventApiRepository eventApiRepository;
+
     @Value("${file.dir}")
     private String fileDir;
     @GetMapping
@@ -39,12 +42,12 @@ public class eventController {
     }
 
 
-    @GetMapping("/new")
+    @GetMapping("/admin/new")
     public String newEvent(@ModelAttribute EventForm form){
         return "/views/event/eventNewList";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/admin/new")
     public String eventNew(@ModelAttribute EventForm form,@RequestParam MultipartFile mainFile) throws IOException {
         DYE_Event dye_event = new DYE_Event();
         dye_event.setTitle(form.getTitle());
@@ -74,6 +77,30 @@ public class eventController {
         form.setText(event.getText());
         model.addAttribute("eventId", event);
         return "/views/event/eventDetail";
+    }
+
+
+    //삭제
+    @GetMapping("/admin/{id}/delete")
+    public String deleteItems(@PathVariable Long id,@ModelAttribute EventForm form) {
+        eventApiRepository.deleteById(id);
+        return "redirect:/event";
+    }
+
+    @GetMapping("/admin/{id}/update")
+    public String updateEvent(@PathVariable Long id,@ModelAttribute EventForm form,Model model) {
+        DYE_Event dye_event = eventService.findById(id);
+        form.setOnoff(dye_event.getOnoff());
+        model.addAttribute("updateEvent",form);
+        return "/views/event/eventEditList";
+    }
+
+    @PostMapping("/admin/{id}/update")
+    public String saveUpdateEvent(@PathVariable Long id,@ModelAttribute EventForm form) {
+        DYE_Event dye_event = eventService.findById(id);
+        dye_event.setOnoff(form.getOnoff());
+        eventApiRepository.save(dye_event);
+        return "redirect:/event";
     }
 
     @ResponseBody

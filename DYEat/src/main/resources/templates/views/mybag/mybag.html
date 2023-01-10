@@ -32,10 +32,13 @@
                                         <th class="text-center filter-false sorter-false">배송정보</th>
                                     </tr>
                                     </thead>
+
                                     <tbody th:each=" order : ${MyOrder}" sec:authorize="isAuthenticated()"
+                                           th:if="${order.status == 0}"
                                            class="text-center">
                                     <td class="text-center" style="width: 5%;"><input th:value="${order.id}"
-                                                                                      name="delList" id="delList" type="checkbox">
+                                                                                      name="delList" id="delList"
+                                                                                      type="checkbox">
                                     </td>
                                     <td class="text-center align-middle">
                                         <div class="align-items-center">
@@ -53,7 +56,8 @@
                                         </div>
                                     </td>
                                     <td class="text-center align-middle">
-                                        <div class="d-flex justify-content-center align-items-center">
+                                        <div th:if="${order.status ==0}"
+                                             class="d-flex justify-content-center align-items-center">
                                             <p id='menu_price' th:text="${order.price}">
                                             <p th:text="원"></p></p>
                                         </div>
@@ -63,7 +67,7 @@
                                     </td>
                                     </tbody>
                                 </table>
-                                <button class="btn btn-primary" type="button" id='deleteBtn' name="deleteBtn"
+                                <button class="btn btn-primary" type="submit" id='deleteBtn' name="deleteBtn"
                                         style="margin-left: 10px;">선택된 메뉴 삭제
                                 </button>
                             </form>
@@ -82,12 +86,16 @@
                 <div class="p-4">
                     <ul class="list-unstyled mb-4">
                         <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">결제
-                            합계</strong><strong th:text="${#aggregates.sum(MyOrder.![price])}+원">0원</strong></li>
+                            합계</strong><strong th:if="${Status.isEmpty()}">0원</strong>
+                            <strong th:unless="${Status.isEmpty()}"
+                                    th:text="${#aggregates.sum(Status.![price])}+원">0원</strong></li>
                         <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                 class="text-muted">배송비</strong><strong>0원</strong></li>
                         <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                 class="text-muted">종합</strong>
-                            <h5 class="font-weight-bold" th:text="${#aggregates.sum(MyOrder.![price])}+원"> 0원</h5>
+                            <h5 th:if="${Status.isEmpty()}">0원</h5>
+                            <h5 th:unless="${Status.isEmpty()}" class="font-weight-bold"
+                                th:text="${#aggregates.sum(Status.![price])}+원"> 0원</h5>
                         </li>
                     </ul>
                     <a class="btn btn-dark rounded-pill py-2 btn-block" role="button" th:href="@{/delivery/pay}">결제
@@ -98,7 +106,7 @@
     </div>
     </body>
     <script>
-        $(document).ready   (function () {
+        $(document).ready(function () {
             $('#deleteBtn').onclick('click', function () {
                 var $checked = $('table input[type=checkbox]:checked');
                 console.log($checked.length);

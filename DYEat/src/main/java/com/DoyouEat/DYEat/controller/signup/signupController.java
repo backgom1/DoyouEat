@@ -24,6 +24,7 @@ public class signupController {
     private final AccountService accountService;
     private final AccountApiRepository accountApiRepository;
 
+
     @GetMapping
     public String Signup(Model model) {
         List<DYE_Account> accounts = accountApiRepository.findAll();
@@ -54,14 +55,11 @@ public class signupController {
 
     @ResponseBody
     @PostMapping(value = "/api", produces = "application/json; charset=UTF-8")
-    public String checkUsernameDuplicate(@RequestBody Map<String, String> map) {
-        String result;
+    public boolean checkUsernameDuplicate(@RequestBody Map<String, String> map) {
         String emailInput = map.get("EmailInput");
-        DYE_Account dye_account = accountApiRepository.findByUsername(emailInput);
-        if(!dye_account.getUsername().isEmpty()){
-            result = "1";
-        }
-        return map.get("EmailInput");
+        boolean check = accountApiRepository.existsDYE_AccountByUsername(emailInput);
+        return check;
+
     }
 
 }

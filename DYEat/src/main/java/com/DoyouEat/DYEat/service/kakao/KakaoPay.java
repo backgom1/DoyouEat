@@ -3,9 +3,11 @@ package com.DoyouEat.DYEat.service.kakao;
 
 import com.DoyouEat.DYEat.controller.delivery.DeliveryForm;
 import com.DoyouEat.DYEat.controller.delivery.PayForm;
+import com.DoyouEat.DYEat.domain.DYE_Delivery;
 import com.DoyouEat.DYEat.domain.DYE_Images;
 import com.DoyouEat.DYEat.domain.DYE_Menu;
 import com.DoyouEat.DYEat.domain.DYE_Orders;
+import com.DoyouEat.DYEat.service.delivery.DeliveryService;
 import com.DoyouEat.DYEat.service.menu.MenuService;
 import com.DoyouEat.DYEat.service.order.OrderService;
 import com.DoyouEat.DYEat.service.security.CustomDetails;
@@ -44,12 +46,16 @@ public class KakaoPay {
 
     private final OrderService orderService;
 
+    private final DeliveryService deliveryService;
+
     public String kakaoPayReady(@AuthenticationPrincipal CustomDetails principalDetails, @ModelAttribute DeliveryForm deliveryForm,
                                 @ModelAttribute PayForm payForm) {
 
         Long id = principalDetails.getAccount().getId();
         DYE_Menu dye_menu = menuService.menuFindOne(id);
         DYE_Orders dye_orders = orderService.findById(id);
+        DYE_Delivery dye_delivery = deliveryService.deliveryFindById(id);
+
 
         log.info("값={}", dye_menu);
         log.info("값2={}", dye_orders);
@@ -66,14 +72,17 @@ public class KakaoPay {
         params.add("cid", "TC0ONETIME");
         params.add("partner_order_id", "1001");
         params.add("partner_user_id", "gorany");
-        params.add("item_name", dye_menu.getTitle());
-        params.add("quantity", "1");
-        params.add("total_amount", String.valueOf(dye_orders.getPrice()));
+        if(dye_delivery.getCount() == 1){
+            params.add("item_name", dye_menu.getTitle());
+        } else {
+            params.add("item_name", dye_menu.getTitle() + " 외 " + dye_delivery.getCount());
+        }
+        params.add("quantity", String.valueOf(dye_delivery.getCount()));
+        params.add("total_amount", String.valueOf(dye_delivery.getPrice()));
         params.add("tax_free_amount", "0");
         params.add("approval_url", "http://localhost:8080/delivery/kakaoPaySuccess");
         params.add("cancel_url", "http://localhost:8080/delivery/pay");
         params.add("fail_url", "http://localhost:8080/delivery/pay/fail");
-
 
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -103,6 +112,7 @@ public class KakaoPay {
 
         Long id = principalDetails.getAccount().getId();
         DYE_Orders dye_orders = orderService.findById(id);
+        DYE_Delivery dye_delivery = deliveryService.deliveryFindById(id);
 
         RestTemplate restTemplate = new RestTemplate();
         // 서버로 요청할 Header
@@ -118,7 +128,7 @@ public class KakaoPay {
         params.add("partner_order_id", "1001");
         params.add("partner_user_id", "gorany");
         params.add("pg_token", pg_token);
-        params.add("total_amount", String.valueOf(dye_orders.getPrice()));
+        params.add("total_amount", String.valueOf(dye_delivery.getPrice()));
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 

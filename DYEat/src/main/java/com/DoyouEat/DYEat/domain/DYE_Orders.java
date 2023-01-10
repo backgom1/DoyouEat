@@ -39,7 +39,7 @@ public class DYE_Orders {
     private DYE_Menu DYEMenu;
 
     @JsonIgnore
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "Delivery_Code")
     private DYE_Delivery dye_delivery;
 

@@ -47,15 +47,16 @@ public class MenuController {
 
 
     //메뉴 리스트 생성 목록
-    @GetMapping("/order/new")
+    @GetMapping("/admin/order/new")
     public String newItem(@ModelAttribute ImageForm itemForm, @ModelAttribute MenuForm menuForm) {
         return "/views/order/orderNewList";
     }
 
     //메뉴 리스트 저장
-    @PostMapping("/order/new")
-    public String saveItem(@RequestParam MultipartFile mainFile, @ModelAttribute ImageForm itemForm, @ModelAttribute MenuForm menuForm) throws IOException {
+    @PostMapping("/admin/order/new")
+    public String saveItem(@RequestParam MultipartFile mainFile, @ModelAttribute ImageForm itemForm, @ModelAttribute MenuForm menuForm, @AuthenticationPrincipal CustomDetails principalDetails) throws IOException {
         List<DYE_Images> storeImageFiles = menuFile.storeFiles(itemForm.getImageFiles());
+        DYE_Account account = principalDetails.getAccount();
         DYE_Menu dye_menu = new DYE_Menu();
 
         //페이지 내용
@@ -63,6 +64,7 @@ public class MenuController {
         dye_menu.setText(menuForm.getText());
         dye_menu.setPrice(menuForm.getPrice());
         dye_menu.setType(menuForm.getType());
+        dye_menu.setDYEAccount(account);
 
         //이미지
         String fullPath = fileDir + mainFile.getOriginalFilename();
@@ -97,9 +99,38 @@ public class MenuController {
         form.setTitle(dye_menu.getTitle());
         form.setPrice(dye_menu.getPrice());
         form.setText(dye_menu.getText());
-        model.addAttribute("reviews",dye_reviews);
+        model.addAttribute("reviews", dye_reviews);
         model.addAttribute("menuId", dye_menu);
         return "/views/order/orderDetail";
+    }
+
+
+    //삭제
+    @GetMapping("/order/admin/{id}/delete")
+    public String deleteItems(@PathVariable Long id) {
+        menuApiRepository.deleteById(id);
+        return "redirect:/order/list";
+    }
+
+
+    @GetMapping("/order/admin/{id}/update")
+    public String updateItems(@PathVariable Long id,@ModelAttribute OrderForm orderForm, @ModelAttribute ImageForm itemForm, Model model, @ModelAttribute MenuForm menuForm) {
+        DYE_Menu dye_menu = menuService.menuFindOne(id);
+        menuForm.setPrice(dye_menu.getPrice());
+        menuForm.setTitle(dye_menu.getTitle());
+        menuForm.setText(dye_menu.getText());
+        model.addAttribute("updateMenu",menuForm);
+        return "/views/order/orderEditList";
+    }
+
+    @PostMapping("/order/admin/{id}/update")
+    public String saveUpdateItems(@PathVariable Long id,@ModelAttribute OrderForm orderForm, @ModelAttribute ImageForm itemForm, @ModelAttribute MenuForm menuForm) {
+        DYE_Menu dye_menu = menuService.menuFindOne(id);
+        dye_menu.setPrice(menuForm.getPrice());
+        dye_menu.setText(menuForm.getText());
+        dye_menu.setTitle(menuForm.getTitle());
+        menuApiRepository.save(dye_menu);
+        return "redirect:/order/list";
     }
 
     //파일 이미지를 저장하는 메서드 -> 스프링에서 자체적으로 지원을 해준다.
@@ -111,10 +142,10 @@ public class MenuController {
     }
 
 
-//    댓글 저장하는 기능
+    //    댓글 저장하는 기능
     @ResponseBody
-    @PostMapping(value = "/order/review/save",produces = "application/json; charset=UTF-8")
-    public String saveComment(@RequestBody Map<String, String> map,@AuthenticationPrincipal CustomDetails principalDetails) {
+    @PostMapping(value = "/order/review/save", produces = "application/json; charset=UTF-8")
+    public String saveComment(@RequestBody Map<String, String> map, @AuthenticationPrincipal CustomDetails principalDetails) {
         DYE_Account account = principalDetails.getAccount();
         DYE_Menu dye_menu = menuService.menuFindOne(Long.parseLong(map.get("boardId")));
         DYE_Review dye_review = new DYE_Review();

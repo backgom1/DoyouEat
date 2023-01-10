@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{/layouts/layout}">
 <th:block layout:fragment="content">
     <body>
@@ -16,6 +17,9 @@
                                                             href="#item-1-2" data-bs-toggle="tab"
                                                             style="text-align: center;">종료된 이벤트</a></li>
             </ul>
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a th:href="@{/event/admin/new}" class="btn btn-primary" type="button">이벤트 게시판 생성</a>
         </div>
         <div class="card-body">
             <div id="nav-tabContent" class="tab-content">

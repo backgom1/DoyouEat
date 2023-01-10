@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layouts/layout}">
+      layout:decorate="~{/layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
     <body>
     <br>
@@ -11,12 +12,12 @@
     <div class="container-fluid top-container">
         <div class="row">
             <div class="col-12 col-md-6 col-xl-4 offset-xl-2">
-                <div class="img-container"><img class="rounded" id="expandedImg" style="width: 400px; height: 400px;"
+                <div class="img-container"><img class="rounded" id="expandedImg" style="width: 600px; height: 400px;"
                                                 th:src="|/images/${menuId.picture}|">
                     <div id="imgtext"></div>
                 </div>
-                <div class="row img-row" style="padding-right: 10px;padding-left: 10px;">
-                    <div th:each="imageList : ${menuId.menu_images}" class="col column"><img
+                <div class="d-flex justify-content-start">
+                    <div th:each="imageList : ${menuId.menu_images}" style="padding-left: 5px"><img
                             style="width: 100px; height: 100px;"
                             class="img-thumbnail img-fluid" th:src="|/images/${imageList.getSaveName()}|"
                             onclick="myFunction(this);" alt="image 1"></div>
@@ -27,6 +28,10 @@
                 <h3 th:text="|${menuId.price}원|"></h3>
                 <p th:text="${menuId.text}" style="font-size: 20px;"></p>
             </div>
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a th:href="@{/order/admin/{id}/delete (id=${menuId.id})}" class="btn btn-primary" type="button">이벤트 게시판 삭제</a>
+            <a th:href="@{/order/admin/{id}/update (id=${menuId.id})}" class="btn btn-primary" type="button">이벤트 게시판 수정</a>
         </div>
     </div>
     <div class="d-xxl-flex justify-content-xxl-center">

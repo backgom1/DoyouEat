@@ -29,11 +29,11 @@ $('#userCheck').click(function () {
             data: JSON.stringify(data),
             contentType: "application/json; charset=uft-8",
             dataType: 'text',
-            success: function (result) {
-                if (result === "1") {
-                    $('#result').text('사용 가능한 아이디입니다.');
+            success: function (check) {
+                if (check === true) {
+                    $('#check').text('사용 불가능한 아이디입니다.');
                 } else {
-                    $('#result').text('이미 사용중인 아이디입니다.');
+                    $('#check').text('사용 가능한 아이디입니다.');
                 }
             },
             error: function (a, b, c) {

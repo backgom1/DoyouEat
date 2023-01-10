@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -26,8 +28,8 @@ public class DYE_Delivery {
     private Long id;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "dye_delivery", fetch = LAZY, cascade = CascadeType.ALL)
-    private DYE_Orders dye_orders;
+    @OneToMany(mappedBy = "dye_delivery", fetch = LAZY)
+    private List<DYE_Orders> dye_orders = new ArrayList<>();
 
     @JsonIgnore
     @OneToOne(mappedBy = "dye_delivery", fetch = LAZY, cascade = CascadeType.ALL)
@@ -47,8 +49,11 @@ public class DYE_Delivery {
     @Column(name="Delivery_Name", length = 50)
     private String name;
 
-    @Column(name="Delivery_Email", length =50)
-    private String email;
+    @Column(name="Delivery_price")
+    private int price;
+
+    @Column(name="Delivery_count")
+    private int count;
 
     @Column(name = "Delivery_PhoneNumber")
     private String phoneNumber;
